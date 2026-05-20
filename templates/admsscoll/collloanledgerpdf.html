@@ -1,0 +1,144 @@
+<html>
+<head>
+    <style>
+    body {
+        font-family: sans-serif;
+        font-size: 10pt;
+    }
+
+          table, th, td {
+            border: 1px solid silver;
+            border-collapse: collapse;
+          }
+          
+          th, td {
+            padding: 5px;
+            text-align: left;    
+          }
+
+   
+    </style>
+</head>
+
+
+    <p style="font-size: 20px;text-align: center;">Loan Ledger</P>
+     
+
+      <table>
+
+        <tr>
+                <th style="width:220px;">Name</th>
+                <th style="width:110px;">LoanID</th>
+                <th style="width:100px;">Loan Date</th>
+                <th style="width:90px;">Loan Amt</th>
+                <th style="width:80px;">Status</th>
+                <th style="width:80px;">EMI</th>
+ 
+            </tr>
+         
+                <tr>
+                  <td>{{fappname}}</td>
+                  <td>{{fapploanid}}</td>
+                  <td>{{fapploandate|date:'d-m-Y'}}</td>
+                  <td>{{fapploanamt}}</td>
+                  <td>{{fapploanstatus}}</td>
+                  <td>{{fapploanemi}}</td>
+    
+                </tr>
+
+      </table> 
+
+
+  <table>
+
+        <tr>
+            <th style="width:340px;">Address</th>
+            <th style="width:90px;">City</th>
+            <th style="width:90px;">MobileNo.</th>
+            <th style="width:160px;">CoApp.Name</th>
+    
+        </tr>
+     
+        <tr class="head">
+            <td>{{fapppresentadd}}</td>
+            <td>{{fapppresentaddcity}}</td>
+            <td>{{fappmobileno}}</td>
+            <td>{{fcoappname}}</td>        
+        </tr>
+
+  </table> 
+
+  <table >
+
+        <tr>
+            <th style="width:240px;">Business</th>
+            <th style="width:180px;">Location</th>
+            <th style="width:100px;">Days.CMP</td>
+            <th style="width:60px;"></td>
+            <th style="width:100px;">Repaid Amt</th> 
+ 
+        </tr>
+     
+        <tr>
+            <td>{{fappoccupation}}</td>
+            <td>{{fappshoplocation}}</td>
+            <td>{{fapploandays}}</td>
+            <td>{{fapploantenr}}</td>
+            <td>{{fapptotalrecamt}}</td> 
+        </tr>
+ 
+  </table> 
+
+             <div class="row">
+             <div class="col">
+
+              <div class="table-responsive">
+
+                      <table style="margin-top:10px;" class="table table-bordered table table-sm table-responsive-sm">
+
+                      <tr>
+                          <th style="width:50px;">Sn.</th>
+                          <th style="width:90px;">Date.</th>
+                          <th style="width:80px;">EMI.Amt.</th>
+                          <th style="width:100px;">Due.Date</th>
+                          <th style="width:100px;">EMI Delay</th>
+                          <th style="width:100px;">Reg.Fee</th>
+                          <th style="width:100px;">Dep.Mode</th>
+                      </tr>
+
+                     {% for a in loanled %}
+                      <tr>
+                          <td>{{forloop.counter}}</td>
+                          <td>{{a.date|date:"d-m-Y"}}</td>
+                          <td>{{a.amount}}</td>
+                          <td>{{a.duedate|date:"d-m-Y"}}</td>
+                          <td>{{a.delaydays}}</td>
+                          <td>{{a.latefee}}</td>
+                          <td>{{a.mode}}</td>
+                        </tr>
+                     {% endfor %}
+
+                    </table> 
+                    <table> 
+
+                     {% for a in loanledsumm %}
+                      <tr>
+                        <th style="width:50px;"></th>
+                        <th style="width:90px;">Total</th>
+                        <th style="width:80px;">{{a.totdep}}</th>
+                        <th style="width:100px;"></th>
+                        <th style="width:100px;">{{a.totaldelaydays}}</td>
+                        <th style="width:100px;">{{a.totlatefee}}</th>
+                        <th style="width:100px;"></th>
+                       </tr>
+                     {% endfor %}
+                    </table> 
+
+                 </div>   
+               </div>
+             </div>
+
+
+   
+</body>
+</html>

@@ -1,0 +1,405 @@
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a class="brand-link">
+      <img src="/static/assets/img/admss.gif" alt="ADMSS" class="brand-image" style="opacity: .8">
+      <span class="brand-text font-weight-heavy" style="color:silver;"><strong>A</strong></span>
+      <span class="brand-text font-weight-heavy" style="color:silver;"><strong>D</strong></span>
+      <span class="brand-text font-weight-heavy" style="color:silver;"><strong>M</strong></span>
+      <span class="brand-text font-weight-heavy" style="color:silver;"><strong>S</strong></span>
+      <span class="brand-text font-weight-heavy" style="color:silver"><strong>S</strong></span>
+      <span class="brand-text font-weight-heavy" style="color:silver"><strong>-</strong></span>
+      <span class="brand-text font-weight-heavy" style="color:silver"><strong>H</strong></span>
+      <span class="brand-text font-weight-heavy" style="color:silver"><strong>Q</strong></span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="info">
+          <a class="d-block">
+            {{loginlocationname}} - {{loginrundate}}
+          </a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="hidden" placeholder="Action" aria-label="" >
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library 
+
+        -->
+
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy "></i>
+              <span class="badge badge-success right">5</span>
+              <p>
+                Masters
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admssadminprocessingfeereceipt/" class="nav-link">
+                  <i class="nav-icon fas fa-copy text-success"></i>
+                  <p>Proc.Fees Receipts</p>
+                </a>
+              </li>
+            </ul>
+
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admssadmingstdata/" class="nav-link">
+                 <i class="nav-icon fas fa-copy text-danger"></i>
+                 <p>Export GST Data</p>
+                </a>
+              </li>
+            </ul>
+
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admssadmincrifdata/" class="nav-link">
+                 <i class="nav-icon fas fa-copy text-warning"></i>
+                 <p>Export CRIF Data</p>
+                </a>
+              </li>
+            </ul>
+            
+             <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admssadminlicdata/" class="nav-link">
+                  <i class="nav-icon fas fa-copy  text-info"></i>
+                  <p>Export LIC Data</p>
+                </a>
+              </li>
+             </ul>
+             <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admssadminupdatelicdata/" class="nav-link">
+                  <i class="nav-icon fas fa-copy  text-info"></i>
+                  <p>Update LIC Data</p>
+                </a>
+              </li>
+             </ul>
+             <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admssadminauditmasterdata/" class="nav-link">
+                  <i class="nav-icon fas fa-copy  text-warning"></i>
+                  <p>AUDIT Loan Master Data</p>
+                </a>
+              </li>
+             </ul>
+             <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admssadminchangetenure/" class="nav-link">
+                  <i class="nav-icon fas fa-copy  text-danger"></i>
+                  <p>Change Tenure</p>
+                </a>
+              </li>
+             </ul>
+          </li>
+
+          
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-edit"></i>
+              <span class="badge badge-success right">5</span>
+              <p>
+                Transactions
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admssadminsearch/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-success"></i>
+                  <p>Seach Entry</p>
+                </a>
+              </li>
+             </ul>
+             <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admssadminupdate/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-warning"></i>
+                  <p>Update Entry</p>
+                </a>
+              </li>
+            </ul>
+             
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admssadmindeleteemi/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-danger"></i>
+                  <p>Delete EMI</p>
+                </a>
+              </li>
+            </ul>
+
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admssadmindeletepayment/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-danger"></i>
+                  <p>Delete Payment</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admssadmindeleteadvance/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-danger"></i>
+                  <p>Delete Advance</p>
+                </a>
+              </li>
+            </ul>      
+            
+         </li>
+         
+         <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-chalkboard-teacher"></i>
+            <span class="badge badge-success right">5</span>
+            <p>
+              Users
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/admssadminusercreate/" class="nav-link">
+                <i class="nav-icon fas fa-chalkboard-teacher text-info"></i>
+                <p>Create User</p>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/admssadminusermodify/" class="nav-link">
+                <i class="nav-icon fas fa-chalkboard-teacher text-success"></i>
+                <p>Modify User</p>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/admssadminuserupdatepwd/" class="nav-link">
+                <i class="nav-icon fas fa-chalkboard-teacher text-warning"></i>
+                <p>Update password</p>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/admssadminuserresetpwd/" class="nav-link">
+                <i class="nav-icon fas fa-chalkboard-teacher text-danger"></i>
+                <p>Reset Passward</p>
+              </a>
+            </li>
+          </ul>
+
+        </li>
+
+
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-edit"></i>
+              <span class="badge badge-success right">10</span>
+              <p>
+                Reports
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admssadmincollemireportbranch/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-warning"></i>
+                  <p>Deposit EMI Report</p>
+                </a>
+              </li>         
+              <li class="nav-item">
+                <a href="/admssadminemiduereport/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-danger"></i>
+                  <p>Due EMI</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/admssadminnewloanreport/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-info"></i>
+                  <p>New Loans</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon far fa-edit text-success"></i>
+                  <p>Settled Loans</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon far fa-edit text-warning"></i>
+                  <p>Loans Near Settle</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon far fa-edit text-info"></i>
+                  <p>Loan Ledger Normal</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon far fa-edit text-info"></i>
+                  <p>Loan Ledger Settlement</p>
+                </a>
+              </li>
+      
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon far fa-edit text-warning"></i>
+                  <p>Trans. Summary</p>
+                </a>
+              </li>              
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon far fa-edit text-danger"></i>
+                  <p>Loan Statistics</p>
+                </a>
+              </li>       
+              <li class="nav-item">
+                <a href="/admssadminemicollectorreport/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-info"></i>
+                  <p>EMI Collector Report</p>
+                </a>
+              </li>       
+              <li class="nav-item">
+                <a href="/admssadmininsuranceduereport/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-info"></i>
+                  <p>Insurance Due Report</p>
+                </a>
+              </li>    
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-file-signature"></i>
+              <span class="badge badge-warning right"> 1 </span>
+              <p>
+                Payments
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+     
+              <li class="nav-item">
+                <a href="/authcenterexpance/" class="nav-link">
+                  <i class="nav-icon fas fa-file-signature text-warning"></i>
+                  <p>Auth.Centre Expense</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+  
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-landmark"></i>
+              <span class="badge badge-danger right"> 3 </span>
+              <p>
+                Bank Trans.
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+     
+              <li class="nav-item">
+                <a href="/banktrans/" class="nav-link">
+                  <i class="nav-icon fas fa-landmark text-info"></i>
+                  <p>Deposit/Withdrawl</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/bankcharges/" class="nav-link">
+                  <i class="nav-icon fas fa-landmark text-warning"></i>
+                  <p>Bank Charges</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/bankintrest/" class="nav-link">
+                  <i class="nav-icon fas fa-landmark text-danger"></i>
+                  <p>Bank Intrest</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-rupee-sign"></i>
+              <span class="badge badge-warning right"> 1 </span>
+              <p>
+                Funds
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+     
+              <li class="nav-item">
+                <a href="/fundinout/" class="nav-link">
+                  <i class="nav-icon fas fa-rupee-sign text-danger"></i>
+                  <p>Funds In/Out</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-hourglass-start"></i>
+              <span class="badge badge-warning right"> 1 </span>
+              <p>
+                EOD
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+     
+              <li class="nav-item">
+                <a href="/admssadmineod/" class="nav-link">
+                  <i class="nav-icon fa fa-hourglass-start text-danger"></i>
+                  <p>EOD</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+     
+     
+          <li class="nav-header">Log</li>
+          <li class="nav-item">
+            <a href="/admssadminlogout/" class="nav-link">
+              <i class="nav-icon far fa-circle text-danger"></i>
+              <p class="text">Logout</p>
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+  

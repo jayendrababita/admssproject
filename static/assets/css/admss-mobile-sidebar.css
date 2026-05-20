@@ -1,0 +1,156 @@
+/**
+ * Mobile sidebar scroll (Chrome / small phones).
+ * AdminLTE: .main-sidebar > .sidebar > nav
+ */
+
+html {
+  height: -webkit-fill-available;
+}
+
+@media (max-width: 991.98px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Keep page content padded consistently on all mobile pages */
+  .content-wrapper > .content,
+  .content-wrapper > .content-header {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .content-wrapper .container-fluid {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .main-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100dvh;
+    height: 100vh;
+    height: -webkit-fill-available;
+    max-height: 100dvh;
+    width: 250px;
+    max-width: 250px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 1038;
+  }
+
+  .main-sidebar .brand-link {
+    flex: 0 0 auto;
+  }
+
+  .main-sidebar .sidebar {
+    flex: 1 1 auto;
+    min-height: 0;
+    height: auto !important;
+    max-height: none !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    touch-action: pan-y;
+  }
+
+  /* AdminLTE overlayScrollbars breaks touch scroll on small phones */
+  .main-sidebar .sidebar.os-host,
+  .main-sidebar .sidebar.os-host-overflow,
+  .main-sidebar .sidebar .os-viewport,
+  .main-sidebar .sidebar .os-content {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    touch-action: pan-y;
+  }
+
+  .main-sidebar .sidebar .os-scrollbar {
+    display: none !important;
+  }
+
+  body.sidebar-open {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  /* Ensure collapsed sidebar is fully hidden on mobile */
+  .sidebar-collapse .main-sidebar,
+  .sidebar-collapse .main-sidebar::before {
+    margin-left: -250px !important;
+  }
+
+  /* position:fixed on body blocks sidebar scroll on small Chrome */
+  @media (max-width: 576px) {
+    body.sidebar-open {
+      position: relative;
+      height: 100dvh;
+      height: 100vh;
+    }
+
+    .main-sidebar {
+      max-width: 250px;
+      width: 250px;
+    }
+
+    .main-sidebar .sidebar {
+      padding-bottom: calc(env(safe-area-inset-bottom, 16px) + 56px);
+    }
+  }
+}
+
+/* Very small phones */
+@media (max-width: 400px) {
+  .main-header .marquee,
+  .main-header marquee {
+    display: none !important;
+  }
+
+  .main-header .nav-link {
+    font-size: 0.85rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+}
+
+/* Login: small phones */
+@media (max-width: 400px) {
+  body.login-page {
+    min-height: 100dvh;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+  }
+
+  body.login-page .login-page-wrap {
+    padding: 8px;
+  }
+
+  .login-page-wrap .user_card {
+    padding: 16px 10px;
+    max-width: 100%;
+  }
+
+  .login-page-wrap .form_container {
+    max-width: 100%;
+  }
+
+  .login-page-wrap .form-control {
+    height: 44px;
+    font-size: 16px;
+    min-width: 0;
+  }
+
+  .login-page-wrap .input-group {
+    flex-wrap: nowrap;
+  }
+
+  .login-page-wrap .input-group .form-control {
+    width: 1%;
+    flex: 1 1 auto;
+  }
+}

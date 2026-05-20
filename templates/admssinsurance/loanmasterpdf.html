@@ -1,0 +1,194 @@
+<html>
+<head>
+    <style>
+    body {
+        font-family: sans-serif;
+        font-size: 10pt;
+    }
+
+    p {
+        margin: 0pt;
+    }
+
+    table.items {
+        border: 0.1mm solid #e7e7e7;
+    }
+
+    .head {
+        vertical-align: middle;
+        height:30px;
+    }
+
+    .items td {
+        border-left: 0.1mm solid #e7e7e7;
+        border-right: 0.1mm solid #e7e7e7;
+    }
+
+    table thead td {
+        text-align: center;
+        border: 0.1mm solid #e7e7e7;
+    }
+
+   
+    </style>
+</head>
+
+<body>
+    <table width="100%" style="font-family: sans-serif;" cellpadding="10">
+        <tr>
+            <td width="100%" style="text-align: center; font-size: 20px; font-weight: bold; padding: 0px;">
+              Loan Ledger
+            </td>
+        </tr>
+    </table>
+     
+
+      <table class="items" width="100%" style="font-size: 14px; border-collapse: collapse;" cellpadding="2">
+        <thead>
+            <tr class="head">
+                <td style="text-align: left;width:250px;"><strong>Name</strong></td>
+                <td style="text-align: left;width:110px;"><strong>LoanID</strong></td>
+                <td style="text-align: left;width:90px;"><strong>Loan Date</strong></td>
+                <td style="text-align: left;width:90px;"><strong>Loan Amt</strong></td>
+                <td style="text-align: left;width:90px;"><strong>Status</strong></td>
+                <td style="text-align: left;width:90px;"><strong>EMI</strong></td>
+ 
+            </tr>
+        </thead>
+        <tbody>
+
+         
+                <tr class="head">
+                  <td>{{fappname}}</td>
+                  <td>{{fapploanid}}</td>
+                  <td>{{fapploandate|date:'d-m-Y'}}</td>
+                  <td>{{fapploanamt}}</td>
+                  <td>{{fstatus}}</td>
+                  <td>{{fapploanemi}}</td>
+    
+                </tr>
+ 
+       </tbody>
+      </table> 
+
+
+  <table class="items" width="100%" style="font-size: 14px; border-collapse: collapse;" cellpadding="2">
+    <thead>
+        <tr class="head">
+            <td style="text-align: left;width:350px;"><strong>Address</strong></td>
+            <td style="text-align: left;width:100px;"><strong>City</strong></td>
+            <td style="text-align: left;width:90px;"><strong>MobileNo.</strong></td>
+            <td style="text-align: left;width:90px;"><strong>Guar.Name</strong></td>
+            <td style="text-align: left;width:100px;"><strong>Guar.Mobile</strong></td>
+ 
+        </tr>
+    </thead>
+    <tbody>
+
+     
+            <tr class="head">
+              <td>{{fapppresentadd}}</td>
+              <td>{{fapppresentaddcity}}</td>
+              <td>{{fappmobileno}}</td>
+              <td>{{fguarname}}</td>    
+              <td>{{fguarmobileno}}</td>   
+            </tr>
+
+   </tbody>
+  </table> 
+
+  <table class="items" width="100%" style="font-size: 14px; border-collapse: collapse;" cellpadding="2">
+    <thead>
+        <tr class="head">
+            <td style="text-align: left;width:200px;"><strong>Business</strong></td>
+            <td style="text-align: left;width:350px;"><strong>Busi.Add.</strong></td>
+            <td style="text-align: left;width:150px;"><strong>Location</strong></td>
+  
+ 
+        </tr>
+    </thead>
+    <tbody>
+     
+            <tr class="head">
+              <td>{{fappoccupation}}</td>
+              <td>{{fappshopadd}}</td>
+              <td>{{fappshoplocation}}</td>
+ 
+            </tr>
+
+   </tbody>
+  </table> 
+
+
+  <table class="items" width="100%" style="font-size: 14px; border-collapse: collapse;" cellpadding="2">
+    <thead>
+        <tr class="head">
+            <td style="text-align: left;width:90px;"><strong>Days.CMP</strong></td>
+            <td style="text-align: left;width:50px;"><strong> </strong></td>
+            <td style="text-align: left;width:90px;"><strong>Repaid Amt</strong></td>
+ 
+        </tr>
+    </thead>
+    <tbody>
+
+     
+            <tr class="head">
+              <td>{{fapploandays}}</td>
+              <td>{{fapploantenr}}</td>
+              <td>{{fapptotalrecamt}}</td>
+    
+
+            </tr>
+
+   </tbody>
+  </table> 
+
+
+
+ 
+  <br>
+
+
+   <table class="items" width="100%" style="font-size: 14px; border-collapse: collapse;" cellpadding="2">
+        <thead>
+            <tr class="head">
+
+                <th style="text-align: left;">Date</td>
+                <th style="text-align: left;">EMI Amt</td>
+                <th style="text-align: left;">Due Date</td>
+                <th style="text-align: left;">DelayDays</td>
+                <th style="text-align: left;">Reg.Fee</td>
+            </tr>
+        </thead>
+        <tbody>
+
+                {% for a in loanled %}
+                <tr class="head">
+
+                  <td>{{a.date|date:"d-m-Y"}}</td>
+                  <td>{{a.amount}}</td>
+                  <td>{{a.duedate|date:"d-m-Y"}}</td>
+                  <td>{{a.delaydays}}</td>
+                  <td>{{a.latefee}}</td>
+    
+                </tr>
+              {% endfor %}
+               {% for a in loanledsumm %}
+                        <tr>
+                        <th></th>
+                        <th>Total</th>
+                        <th>{{a.totdep}}</th>
+                        <th></th>
+                        <th>{{a.totaldelaydays}}</td>
+                        <th>{{a.totlatefee}}</th>
+                        <th></th>
+                        </tr>
+               {% endfor %}          
+     
+       </tbody>
+      </table> 
+    
+    <br>
+   
+</body>
+</html>

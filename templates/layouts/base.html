@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/static/assets/admssfevicon.ico" type="image/x-icon">
+  {% include 'includes/pwa_head.html' %}
+
+  <title>
+     {% block title %}{% endblock %} 
+  </title> 
+
+  {% block stylesheets %}{% endblock stylesheets %}
+
+</head>
+<!-- <body class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto;-->
+<body class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto; {% block body_class %} {% endblock body_class %}">
+
+  <div class="wrapper">
+
+    {% include 'includes/navigation.html' %}
+
+    {% include 'includes/sidebar.html' %}
+
+    {% block content %}{% endblock content %}
+
+    {% include 'includes/footer.html' %}
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+
+</div>
+<!-- ./wrapper -->
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+{% include 'includes/pwa_scripts.html' %}
+
+</body>
+</html>

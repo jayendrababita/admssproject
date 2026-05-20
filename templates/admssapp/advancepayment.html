@@ -1,0 +1,434 @@
+{% extends "admssapp/base.html" %}
+
+{% block title %} admss {% endblock %} 
+
+<!-- Element injected in the BODY element -->
+{% block body_class %}  {% endblock body_class %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="/static/assets/plugins/daterangepicker/daterangepicker.css">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="/static/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="/static/assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="/static/assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="/static/assets/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="/static/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <!-- Bootstrap4 Duallistbox -->
+  <link rel="stylesheet" href="/static/assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+  <link rel="stylesheet" href="/static/assets/css/btnbootstrap.css">
+  <script src="/static/assets/js/bootstrap.bundle.js"></script>
+  <link rel="stylesheet" href="/static/assets/css/stylelockscreen.css">
+  <script src="/static/assets/js/stylelockscreen.js"></script>
+
+{% endblock stylesheets %}
+
+{% block content %}    
+
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <div id="skm_LockPane" class="LockOff"></div>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-0">
+          <div class="col-sm-12">
+            <h4>Advance Payments</h4>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+   
+        
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="box-body">
+              <form  action="/advancepayment/" method="POST">
+                {% csrf_token %}
+                <div class="col-sm-12">
+                   <div class="row">
+            
+                      <div class="form-group" >
+                        <div class="col">
+                          <label style="margin-left:2px;" >Person Name</label>
+                          <select id="personname" name="personname" class="form-control"  style="width: 200px;margin-left:2px;">
+                          <option value="">Select</option>
+                          {% for person in allperson %}
+                          <option value="{{person.personcode}}.{{person.persontype}}">{{person.personname}}</option>
+                          {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group" >
+                        <div class="col">
+                        <label style="margin-left:2px;" >Person Code</label>
+                        <select id="personcode" name="personname" class="form-control" style="width:200px;margin-left:2px;" disabled>
+                          <option value="">Select</option>
+                          {% for person in allperson %}
+                          <option value={{person.personcode}}> {{person.personcode}}&nbsp&nbsp/&nbsp&nbsp{{person.personname}} </option>
+                          {% endfor %}
+                         </select>
+                       </div>
+                    </div>
+                    <div class="form-group" >                
+                      <div class="col">
+                      <label style="margin-left:15px;margin-top:40px;">Name</label>
+                      <input  type="radio" name="nameid"  id="name" value="name" checked>
+      
+                      <label style="margin-left:15px;margin-top:40px;">Code</label>
+                      <input  type="radio" name="nameid"  id="id" value="id" >
+                      </div>
+                    </div>
+                  </div>
+                    
+                  <div class="row">
+            
+                    <div class="form-group" >
+                      <div class="col">
+                        <label style="margin-left:2px;" >Account Head</label>
+                        <select id="transcode" name="transcode" class="form-control" style="width:220px;margin-left:2px;" readonly>
+                          <option value=""></option>
+                         </select>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group" >
+                      <div class="col">
+                      <label style="margin-left:2px;" >Amount</label>
+                      <input type="number" id="cashrec" name="cashrec" min="1"  class="form-control"  style="height:35px;font-size:20px;width:120px;margin-left:2px;text-align:center;" autocomplete="off"> 
+      
+                     </div>
+                  </div>
+
+                  <div class="form-group" >   
+                    <div class="col"> 
+                      <label style="margin-left:2px;">Payment Mode.</label>
+                      <select name="emimode" id="emimode" class="upper form-control"  style="height:35px;width:110px;" autocomplete="off" required>
+                      <option value="">Select</option>
+                      <option value="CASH">CASH</option>
+                      <option value="BANK">BANK</option>
+                       </select>
+                    </div>
+                  </div>  
+     
+                  <div class="form-group" >   
+                    <div class="col"> 
+                      <label style="margin-left:2px;">Bank A/C</label>
+                      <select name="appbankac" id="appbankac" class="form-control"  style="height:35px;width:155px;" autocomplete="off" disabled required>
+                        <option value="">Select</option>
+                        {% for bank in allbank %}
+                        <option value={{bank.bankac}}> {{bank.bankac}}-Rs.{{bank.clbank}} </option>
+                        {% endfor %}
+                       </select>
+                    </div>
+                  </div>    
+                  
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Chq./Neft ID.</label>
+                      <input type="text" name="appbankchq" id="appbankchq"  class="form-control" style="height:35px;width:150px;margin-left:2px;" autocomplete="off" disabled required>
+                    </div>
+                  </div>     
+
+                </div>
+
+                <div class="row">
+            
+                  <div class="form-group" >
+                    <div class="col">
+                      <label style="margin-left:2px;" >Remark</label>
+                      <input type="text" name="remark" id="remark"  class="form-control" style="height:35px;width:490px;margin-left:2px;" onkeydown="upperCaseF(this)" autocomplete="off">
+
+                    </div>
+                  </div>
+                  
+              </div>
+                
+
+                <br>
+
+                <div class="custom-control custom-checkbox" style="margin-left:10px;">
+                  <input type="checkbox" class="custom-control-input" id="defaultUnchecked" >
+                  <label class="custom-control-label" for="defaultUnchecked">Confirm Payment</label>
+               </div>
+
+                <br>
+
+              <div class="row">
+                      <div class="form-group">
+                        <button type="submit" id="submit" name="show" class="btn btn-info" style="margin-left:10px;width:90px;" disabled onclick="skm_LockScreen();">Submit </button>
+                        <button type="button" id="cancel" class="btn btn-warning" onclick="location.href='/';"style="margin-left:2px;width:90px;">Cancel</button>
+                      </div>
+                </div>
+ 
+                    
+                <div id="mess">        
+                  {% if messages %}
+                   {% for message in messages %}
+                    <label style="margin-left:1%;color: grey"><strong>{{message}}</strong></label>
+                   {% endfor %}
+                  {% endif %}
+                 </div>
+                
+          
+              </form>  
+            </div>
+          </div>
+        </div>
+        </div>
+    </section>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<!-- Bootstrap 4 -->
+<script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="/static/assets/plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="/static/assets/plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="/static/assets/plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="/static/assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="/static/assets/plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="/static/assets/plugins/moment/moment.min.js"></script>
+<script src="/static/assets/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="/static/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="/static/assets/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="/static/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/assets/js/adminlte.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="/static/assets/js/pages/dashboard.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/static/assets/js/demo.js"></script>
+<link rel="stylesheet" href="/static/assets/css/btnbootstrap.css">
+<script src="/static/assets/js/bootstrap.bundle.js"></script>
+
+  <script>
+
+
+    document.getElementById('personname').onchange = function () {
+
+
+      var emp = document.getElementById("personname")
+      var codecdr = emp.value;
+
+      var newcodecdr = codecdr.split(".");
+      var empcode = newcodecdr[0];
+      var empcdr = newcodecdr[1].toUpperCase();
+           
+      //empname = emp.text ;
+
+
+      //document.getElementById('transcode').innerHTML='<option value='+empcode+'>'+empname+'</option>';
+
+      //alert(document.getElementById('transcode').value)
+
+
+
+      if (empcdr=='INV') {
+          document.getElementById('transcode').innerHTML='<option value="3365">ADVANCE TO INVESTOR</option>';
+
+
+      } else if (empcdr=='DIR') {
+        document.getElementById('transcode').innerHTML='<option value="3366">ADVANCE TO DIRECTOR</option>';
+          var t = document.getElementById("transcode")
+         
+        } else if (empcdr=='EMP') {
+        document.getElementById('transcode').innerHTML='<option value="3367">ADVANCE TO EMPLOYEE</option>';
+          var t = document.getElementById("transcode")
+
+        } else if (empcdr=='COLL') {
+        document.getElementById('transcode').innerHTML='<option value="3368">ADVANCE TO DEVELOPMENT STAFF</option>';
+          var t = document.getElementById("transcode")
+         
+        } else if (empcdr=='ASSO') {
+        document.getElementById('transcode').innerHTML='<option value="3369">ADVANCE TO ASSOCIATE</option>';
+          var t = document.getElementById("transcode")
+
+        } else if (empcdr=='DASS') {
+        document.getElementById('transcode').innerHTML='<option value="3370">ADVANCE TO DEV. ASSOCIATE</option>';
+          var t = document.getElementById("transcode")
+
+        } else if (empcdr=='SPRO') {
+        document.getElementById('transcode').innerHTML='<option value="3380">ADVANCE TO SERVICE PROVIDER</option>';
+          var t = document.getElementById("transcode")
+          
+        }
+      }
+
+
+      
+
+      
+
+        function upperCaseF(a){
+            setTimeout(function(){
+                a.value = a.value.toUpperCase();
+            }, 1);
+        }
+    
+        document.getElementById('personname').onclick = function () {
+
+        document.getElementById("mess").disabled=true;
+        document.getElementById("mess").innerHTML = "     ";
+        }
+
+              
+
+        document.getElementById('name').onchange = function () {
+          document.getElementById("personname").disabled=false;
+          document.getElementById("personcode").disabled=true;
+        }
+
+        document.getElementById('id').onchange = function () {
+          document.getElementById("personname").disabled=true;
+          document.getElementById("personcode").disabled=false;
+        }
+
+
+      
+
+
+        document.getElementById('emimode').onchange = function () {
+          var emode = document.getElementById('emimode')
+          if (emode.value=="BANK"){
+             document.getElementById("appbankchq").disabled=false;
+             document.getElementById("appbankac").disabled=false;
+  
+          }
+          if (emode.value=="CASH"){
+            document.getElementById("appbankchq").disabled=true;
+            document.getElementById("appbankac").disabled=true;
+
+         }
+        }
+
+      
+    
+        document.getElementById('defaultUnchecked').onchange = function () {
+          var ochk = document.getElementById("defaultUnchecked");
+          var emode = document.getElementById('emimode')
+          var ecash = document.getElementById('cashrec')
+
+          if (ochk.checked && (emode.value=="CASH"||emode.value=="BANK") && ecash.value > 0){
+            document.getElementById("submit").disabled=false;
+          } else{
+            document.getElementById("defaultUnchecked").checked=false;
+            document.getElementById("submit").disabled=true;
+          }
+        }
+
+
+
+        document.getElementById('appbankac').onchange = function () {
+          var obankac = document.getElementById("bankac");
+          document.getElementById("appbankchq").value = "TRANSFER";           
+             }
+
+
+
+
+    $(function () {
+      //Initialize Select2 Elements
+      $('.select2').select2()
+
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
+
+      //Datemask dd/mm/yyyy
+      $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+      //Datemask2 mm/dd/yyyy
+      $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+      //Money Euro
+      $('[data-mask]').inputmask()
+
+      //Date range picker
+      $('#reservationdate').datetimepicker({
+          format: 'L'
+      });
+      //Date range picker
+      $('#reservation').daterangepicker()
+      //Date range picker with time picker
+      $('#reservationtime').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+          format: 'MM/DD/YYYY hh:mm A'
+        }
+      })
+      //Date range as a button
+      $('#daterange-btn').daterangepicker(
+        {
+          ranges   : {
+            'Today'       : [moment(), moment()],
+            'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+            'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          },
+          startDate: moment().subtract(29, 'days'),
+          endDate  : moment()
+        },
+        function (start, end) {
+          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+        }
+      )
+
+      //Timepicker
+      $('#timepicker').datetimepicker({
+        format: 'LT'
+      })
+
+      //Bootstrap Duallistbox
+      $('.duallistbox').bootstrapDualListbox()
+
+      //Colorpicker
+      $('.my-colorpicker1').colorpicker()
+      //color picker with addon
+      $('.my-colorpicker2').colorpicker()
+
+      $('.my-colorpicker2').on('colorpickerChange', function(event) {
+        $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+      });
+
+      $("input[data-bootstrap-switch]").each(function(){
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+      });
+
+    })
+  </script>
+
+{% endblock javascripts %}

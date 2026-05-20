@@ -1,0 +1,177 @@
+{% extends "admssadmin/base.html" %}
+
+{% block title %} ADMSS {% endblock %} 
+
+<!-- Element injected in the BODY element -->
+{% block body_class %} sidebar-mini {% endblock body_class %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="/static/assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="/static/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="/static/assets/plugins/jqvmap/jqvmap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="/static/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="/static/assets/plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="/static/assets/plugins/summernote/summernote-bs4.min.css">
+  <link rel="stylesheet" href="/static/assets/css/btnbootstrap.css">
+  <script src="/static/assets/js/bootstrap.bundle.js"></script>
+  <link rel="stylesheet" href="/static/assets/css/stylelockscreen.css">
+  <script src="/static/assets/js/stylelockscreen.js"></script>
+
+{% endblock stylesheets %}
+
+{% block content %}
+  
+  <div class="content-wrapper">
+    <div id="skm_LockPane" class="LockOff"></div>
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h4 class="m-0 text-dark">{{loginlocationname}}</h4>
+          </div><!-- /.col -->
+ 
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+               <div class="inner">
+                <p style="font-size:35px;font-weight:1000;" >  {{newac}}<sup style="font-size: 20px"> ac </sup></p>
+                <p> <b>New Loans </b></p>
+                <p> <b>{{fmonth}}'{{fyear}} </b></p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-ios-personadd-outline"></i>
+
+              </div>
+              <a href="/dashboardadmssadminnewloanreport/" class="small-box-footer" type ="submit" onclick="skm_LockScreen();"> <b>More info </b><i class="fas fa-arrow-circle-right"></i></a>
+
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <p style="font-size:35px;font-weight: 1000" > {{emicoll}} <sup style="font-size: 20px">%</sup></p>
+                <p> <b>EMI Collection</b> </p>
+                <p> <b>{{start_week}} - {{end_week}} </b> </p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-ios-pie-outline"></i>
+              </div>
+              <a href="/dashboardadmssadminemidepositreport/" class="small-box-footer" type ="submit" onclick="skm_LockScreen();"> <b>More info </b><i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <p style="font-size:35px;font-weight: 1000" > {{iregac}} <sup style="font-size: 20px"> ac </sup>&nbsp&nbsp&nbsp
+                <span style="font-size:35px;font-weight: 1000";>{{deemi}}<sup style="font-size: 20px"> ac </sup></span>
+                </p>
+                <p> <b>EMI Irregular/Lagged</b> </p>
+                <p> <b>(EMI Due)</b> </p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-ios-alarm-outline"></i>
+              </div>
+              <a href="/dashboardadmssadminemiduereport/" class="small-box-footer" type ="submit" onclick="skm_LockScreen();"><b > More info </b> <i class="fas fa-arrow-circle-right"></i> </a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning ">
+              <div class="inner">
+                <p style="font-size:35px;font-weight: 1000;" > {{settleac}} <sup style="font-size: 20px;"> ac </sup></p>
+                <p ><b>Loans Settled </b></p>
+                <p ><b>{{fmonth}}'{{fyear}}</b> </p>
+
+              </div>
+              <div class="icon">
+                <i class="ion  ion-ios-trash-outline"></i>
+              </div>
+              <a href="/dashboardsettledloanreport/" class="small-box-footer"  type ="submit" onclick="skm_LockScreen();"><b >More info</b> <i class="fas fa-arrow-circle-right" ></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+        <!-- /.row -->
+        <!-- Main row -->
+   
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <!-- jQuery -->
+  <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="/static/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script>
+    $.widget.bridge('uibutton', $.ui.button)
+  </script>
+  <!-- Bootstrap 4 -->
+  <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- ChartJS -->
+  <script src="/static/assets/plugins/chart.js/Chart.min.js"></script>
+  <!-- Sparkline -->
+  <script src="/static/assets/plugins/sparklines/sparkline.js"></script>
+  <!-- JQVMap -->
+  <script src="/static/assets/plugins/jqvmap/jquery.vmap.min.js"></script>
+  <script src="/static/assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="/static/assets/plugins/jquery-knob/jquery.knob.min.js"></script>
+  <!-- daterangepicker -->
+  <script src="/static/assets/plugins/moment/moment.min.js"></script>
+  <script src="/static/assets/plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="/static/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <!-- Summernote -->
+  <script src="/static/assets/plugins/summernote/summernote-bs4.min.js"></script>
+  <!-- overlayScrollbars -->
+  <script src="/static/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/static/assets/js/adminlte.js"></script>
+  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+  <script src="/static/assets/js/pages/dashboard.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="/static/assets/js/demo.js"></script>
+
+{% endblock javascripts %}

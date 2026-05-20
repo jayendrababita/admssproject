@@ -1,0 +1,663 @@
+{% extends "admssapp/base.html" %}
+
+{% block title %} admss {% endblock %} 
+
+<!-- Element injected in the BODY element -->
+{% block body_class %}  {% endblock body_class %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="/static/assets/plugins/daterangepicker/daterangepicker.css">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="/static/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="/static/assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="/static/assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="/static/assets/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="/static/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <!-- Bootstrap4 Duallistbox -->
+  <link rel="stylesheet" href="/static/assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+  <link rel="stylesheet" href="/static/assets/css/btnbootstrap.css">
+  <script src="/static/assets/js/bootstrap.bundle.js"></script>
+
+{% endblock stylesheets %}
+
+{% block content %}    
+
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-0">
+          <div class="col-sm-12">
+            <h4>Loan Master</h4>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+
+
+    <section class="content">
+      <div class="container-fluid">
+   
+        
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="box-body">
+              <form  action="" method="POST">{% csrf_token %}
+                <div class="col-sm-12">
+                   <div class="row">
+                      <div class="form-group" >
+                        <div class="col">
+                          <label style="margin-left:2px;" >Name</label>
+                          <select id="loanid_name" name="loanidname" class="form-control"  style="width: 200px;margin-left:2px;">
+                          <option value={{fapploanid}}> {{fappname}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group" >
+                        <div class="col">
+                        <label style="margin-left:2px;" >Loan ID</label>
+                        <select id="loanid_id" name="loanidname" class="form-control" style="width:200px;margin-left:2px;">
+                          <option value={{fapploanid}}>{{fapploanid}}</option>
+                         </select>
+                       </div>
+                      </div>
+
+                    <div class="form-group" >                
+                      <div class="col">
+                        <button type="button" id="back" name="show" class="btn btn-info" onclick="location.href='/loanmaster/';"style="margin-left:40px;margin-top:30px;width:90px;">Back</button>
+                        <button type="button" id="cancel" class="btn btn-warning" onclick="location.href='/';"style="margin-left:2px;;margin-top:30px;width:90px;">Cancel</button>
+                        <button type="button" id="print" class="btn btn-secondary" onclick="divPrint('divName');" style="margin-left:2px;;margin-top:30px;width:90px;">Print</button> 
+                      </div>
+                    </div>
+
+                  </div>
+
+
+                  </div>
+                  
+
+
+
+                        
+              </form>  
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+ <div  id="divName">
+    <section class="content">
+      <div class="container-fluid" >
+      
+        
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="box-body">
+              <div class="row table-responsive-sm">
+                <div class="col-sm-12">
+                 
+                  <div class="row">
+
+                    <div class="form-group">    
+                      <div class="col">   
+                        <label style="margin-left:2px;">Business</label>
+                        <input type="text" name="business" value="{{fappoccupation}}" class="upper form-control" style="height:35px;width:170px;margin-left:2px;" autocomplete="off" readonly >
+                      </div>
+                    </div>  
+                    <div class="form-group">    
+                      <div class="col">   
+                        <label style="margin-left:2px;">Busi.Add.</label>
+                        <input type="text" name="loanint" value="{{fappshopadd}}" class="upper form-control" style="height:35px;width:240px;margin-left:2px;" autocomplete="off" readonly >
+                      </div>
+                    </div>  
+                    <div class="form-group">    
+                      <div class="col">   
+                        <label style="margin-left:2px;">Shop Location</label>
+                        <input type="text" name="loandue" value="{{fappshoplocation}}" class="upper form-control" style="height:35px;width:195px;margin-left:2px;" autocomplete="off" readonly >
+                      </div>
+                    </div>
+                    
+                    <div class="form-group">    
+                      <div class="col">   
+                        <label style="margin-left:2px;">Address</label>
+                        <input type="text" name="address" value="{{fapppresentadd}}" class="form-control" style="height:35px;width:280px;margin-left:2px;" autocomplete="off" readonly >
+                      </div>
+                    </div>  
+
+                    <div class="form-group">    
+                      <div class="col">   
+                        <label style="margin-left:2px;">City</label>
+                        <input type="text" name="address" value="{{fapppresentaddcity}}" class="form-control" style="height:35px;width:120px;margin-left:2px;" autocomplete="off" readonly >
+                      </div>
+                    </div>  
+
+                    <div class="form-group">    
+                      <div class="col">   
+                        <label style="margin-left:2px;">Loan Date</label>
+                        <input type="text" name="lastemi" value="{{fapploandate|date:'d-m-Y'}}" class="form-control" style="height:35px;width:100px;margin-left:2px;" autocomplete="off" readonly >
+                      </div>
+                    </div>  
+
+                    <div class="form-group">
+                       <div class="col">
+                        <label style="margin-left:2px;">App.Mobile</label>
+                        <input type="text" name="address" value="{{fappmobileno}}" class="form-control"
+                        style="height:35px;width:120px;margin-left:2px;" autocomplete="off" readonly>
+                       </div>
+                    </div>
+
+                  </div>  
+  
+                  <div class="row">
+
+                    <div class="form-group">    
+                      <div class="col">   
+                        <label style="margin-left:2px;">Coapp.name</label>
+                        <input type="text" name="coappname" value="{{fcoappname}}" class="upper form-control" style="height:35px;width:200px;margin-left:2px;" autocomplete="off" readonly >
+                      </div>
+                    </div>  
+                    <div class="form-group">    
+                      <div class="col">   
+                        <label style="margin-left:2px;">Coapp.Rel.</label>
+                        <input type="text" name="coapprel" value="{{fcoapprelation}}" class="upper form-control" style="height:35px;width:125px;margin-left:2px;" autocomplete="off" readonly >
+                      </div>
+                    </div>
+                    <div class="form-group">    
+                      <div class="col">   
+                        <label style="margin-left:2px;">Coapp.Mobile.</label>
+                        <input type="text" name="coapprel" value="{{fcoappmobileno}}" class="upper form-control" style="height:35px;width:125px;margin-left:2px;" autocomplete="off" readonly >
+                      </div>
+                    </div>    
+                    <div class="form-group">    
+                      <div class="col">   
+                        <label style="margin-left:2px;">Guar.Name</label>
+                        <input type="text" name="loandue" value="{{fguarname}}" class="upper form-control" style="height:35px;width:225px;margin-left:2px;" autocomplete="off" readonly >
+                      </div>
+                    </div>
+                    
+                    <div class="form-group">    
+                      <div class="col">   
+                        <label style="margin-left:2px;">Guar.Address</label>
+                        <input type="text" name="address" value="{{fguarpresentadd}}" class="form-control" style="height:35px;width:290px;margin-left:2px;" autocomplete="off" readonly >
+                      </div>
+                    </div>  
+
+                    <div class="form-group">    
+                      <div class="col">   
+                        <label style="margin-left:2px;">Guar.City</label>
+                        <input type="text" name="address" value="{{fguarpresentaddcity}}" class="form-control" style="height:35px;width:140px;margin-left:2px;" autocomplete="off" readonly >
+                      </div>
+                    </div>  
+
+                    <div class="form-group">    
+                      <div class="col">   
+                        <label style="margin-left:2px;">Guar.Mobile</label>
+                        <input type="text" name="address" value="{{fguarmobileno}}" class="form-control" style="height:35px;width:120px;margin-left:2px;" autocomplete="off" readonly >
+                      </div>
+                    </div>  
+
+                  </div>  
+  
+
+
+
+
+                    
+                <div class="row">
+
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Loan</label>
+                      <input type="text" name="loanamt" value="{{fapploanamt}}" class="upper form-control" style="height:35px;width:90px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+  
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Ini.Due Amt</label>
+                      <input type="text" name="loandue" value="{{fapptotaldueamt}}" class="upper form-control" style="height:35px;width:90px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Repaid Amt</label>
+                      <input type="text" name="loanrec" value="{{fapptotalrecamt}}" class="upper form-control" style="height:35px;width:90px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">EMI</label>
+                      <input type="text" name="loanint" value="{{fapploanemi}}" class="upper form-control" style="height:35px;width:90px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Tenure</label>
+                      <input type="text" name="loanint" value="{{fapploantenr}}" class="upper form-control" style="height:35px;width:90px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Period</label>
+                      <input type="text" name="loanint" value="{{fapploandays}}" class="upper form-control" style="height:35px;width:90px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+    
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Last EMI</label>
+                      <input type="text" name="lastemi" value="{{fapplastemidepdate|date:'d-m-Y'}}" class="form-control" style="height:35px;width:100px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Status</label>
+                      <input type="text" name="loanint" value="{{fstatus}}" class="upper form-control" style="height:35px;width:100px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Settle.Date</label>
+                      <input type="text" name="loanint" value="{{fapploansettlementdate|date:'d-m-Y'}}" class="upper form-control" style="height:35px;width:100px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Insur.Date</label>
+                      <input type="text" name="loanint" value="{{fapplifeinsurdate|date:'d-m-Y'}}" class="upper form-control" style="height:35px;width:100px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Insur.Upto</label>
+                      <input type="text" name="loanint" value="{{fapplifeinsuruptodate|date:'d-m-Y'}}" class="upper form-control" style="height:35px;width:100px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">EMI Day</label>
+                      <input type="text" name="loanint" value="{{fcolldaychar}}" class="upper form-control" style="height:35px;width:100px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">EMI Freq.</label>
+                      <input type="text" name="loanint" value="{{fappemifreq}}" class="upper form-control" style="height:35px;width:100px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Total.EMI Due</label>
+                      <input type="text" name="loanint" value="{{ftotalemidue}}" class="upper form-control" style="height:35px;width:100px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Curr.EMI Due</label>
+                      <input type="text" name="loanint" value="{{fcurremidue}}" class="upper form-control" style="height:35px;width:100px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Curr.EMI Done</label>
+                      <input type="text" name="loanint" value="{{fcurremidone}}" class="upper form-control" style="height:35px;width:100px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Over.Due.EMI</label>
+                      <input type="text" name="loanint" value="{{fcurremibal}}" class="upper form-control" style="height:35px;width:100px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Over.Due.Amt.</label>
+                      <input type="text" name="loanint" value="{{fcurroverdue}}" class="upper form-control" style="height:35px;width:100px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Total.Delay.Days</label>
+                      <input type="text" name="loanint" value="{{totaldelaydays}}" class="upper form-control" style="height:35px;width:100px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Total.Delay.Charges</label>
+                      <input type="text" name="loanint" value="{{foverdueamt}}" class="upper form-control" style="height:35px;width:100px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Curr.Delay.Days</label>
+                      <input type="text" name="loanint" value="{{fdelaydays}}" class="upper form-control" style="height:35px;width:100px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+                  <div class="form-group">    
+                    <div class="col">   
+                      <label style="margin-left:2px;">Curr.Delay.Charges</label>
+                      <input type="text" name="loanint" value="{{latefee}}" class="upper form-control" style="height:35px;width:100px;margin-left:2px;" autocomplete="off" readonly >
+                    </div>
+                  </div>  
+                </div>  
+                  <div class="row">
+                    <div class="form-group">    
+                      <div class="col">   
+                        <label style="margin-left:2px;">Recovery officer</label>
+                        <input type="text" name="coappname" value="{{frpersonname}}" class="upper form-control" style="height:35px;width:175px;margin-left:2px;" autocomplete="off" readonly >
+                      </div>
+                    </div>  
+                    <div class="form-group">    
+                      <div class="col">   
+                        <label style="margin-left:2px;">Associate Name</label>
+                        <input type="text" name="coapprel" value="{{fassociatename}}" class="upper form-control" style="height:35px;width:175px;margin-left:2px;" autocomplete="off" readonly >
+                      </div>
+                    </div>
+                    <div class="form-group">    
+                      <div class="col">   
+                        <label style="margin-left:2px;">Admin Name</label>
+                        <input type="text" name="coapprel" value="{{fadminpersonname}}" class="upper form-control" style="height:35px;width:175px;margin-left:2px;" autocomplete="off" readonly >
+                      </div>
+                    </div>    
+
+                  </div>  
+
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+    
+    <section class="content">
+      <div class="container-fluid">
+   
+        
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="box-body">
+              <form  action="" method="POST">
+                {% csrf_token %} 
+                <div class="col-sm-12">
+                 
+                  <div class="row">
+
+            
+                  <br>
+          
+
+                  <div class="container-fluid table-responsive-sm">
+                    <h5>Repayment Details</h5>
+ 
+                    <table style="width:600px;" class="table table-bordered table table-sm table-responsive-sm">
+                      <thead>
+                        <tr>
+                          <th style="width:;">Sn.</th>
+                          <th style="width:;">Date.</th>
+                          <th style="width:;">EMI.Amt.</th>
+                          <th style="width:;">Due.Date</th>
+                          <th style="width:;">EMI Delay</th>
+                          <th style="width:;">Reg.Fee.</th>
+                          <th style="width:;">Mode.</th>           
+                        </tr>
+                      </thead>
+                      <tbody>
+             
+                        {% for a in loanled %}
+                        <tr>
+                          <td style="text-align:center;">{{forloop.counter}}</td>
+                          <td>{{a.date|date:"d-m-Y"}}</td>
+                          <td>{{a.amount}}</td>
+                          <td>{{a.duedate|date:"d-m-Y"}}</td>
+                          <td>{{a.delaydays}}</td>
+                          <td>{{a.latefee}}</td>
+                          <td>{{a.mode}}</td>
+                        </tr>
+                        {% endfor %}
+                        {% for a in loanledsumm %}
+                        <tr>
+                        <th></th>
+                        <th>Total</th>
+                        <th>{{a.totdep}}</th>
+                        <th></th>
+                        <th>{{a.totaldelaydays}}</td>
+                        <th>{{a.totlatefee}}</th>
+                        <th></th>
+                        </tr>
+                        {% endfor %}                    
+                      </tbody>
+                    </table>
+                  </div>
+                  
+
+
+
+                        
+              </form>  
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+
+
+
+
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <!-- jQuery -->
+  <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Select2 -->
+  <script src="/static/assets/plugins/select2/js/select2.full.min.js"></script>
+  <!-- Bootstrap4 Duallistbox -->
+  <script src="/static/assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+  <!-- InputMask -->
+  <script src="/static/assets/plugins/moment/moment.min.js"></script>
+  <script src="/static/assets/plugins/inputmask/jquery.inputmask.min.js"></script>
+  <!-- date-range-picker -->
+  <script src="/static/assets/plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- bootstrap color picker -->
+  <script src="/static/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="/static/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <!-- Bootstrap Switch -->
+  <script src="/static/assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/static/assets/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="/static/assets/js/demo.js"></script>
+  <!-- Page script -->
+  <script>
+
+    
+          
+    
+        document.getElementById('name').onchange = function () {
+          document.getElementById("loanid_name").disabled=false;
+          document.getElementById("loanid_id").disabled=true;
+
+          document.getElementById("mess").disabled=true;
+          document.getElementById("mess").innerHTML = "     ";
+        }
+
+          
+
+        document.getElementById('id').onchange = function () {
+          document.getElementById("loanid_name").disabled=true;
+          document.getElementById("loanid_id").disabled=false;
+        }
+
+
+        document.getElementById('emimode').onchange = function () {
+          var emode = document.getElementById('emimode')
+          if (emode.value=="BANK"){
+             document.getElementById("appbankchq").disabled=false;
+             document.getElementById("appbankac").disabled=false;
+          }
+          if (emode.value=="CASH"){
+            document.getElementById("appbankchq").disabled=true;
+            document.getElementById("appbankac").disabled=true;
+         }
+        }
+
+
+
+        document.getElementById('loanid_id').onchange = function () {
+          document.getElementById("submit").disabled=false;
+        }
+
+
+        document.getElementById('defaultUnchecked').onchange = function () {
+          var ochk = document.getElementById("defaultUnchecked");
+          var emode = document.getElementById('emimode')
+
+          if (ochk.checked && (emode.value=="CASH"||emode.value=="BANK")){
+            document.getElementById("submit").disabled=false;
+          } else{
+            document.getElementById("defaultUnchecked").checked=false;
+            document.getElementById("submit").disabled=true;
+          }
+        }
+
+
+      
+
+
+        function divPrint(divName) {
+          var printContents = document.getElementById(divName).innerHTML;
+          var originalContents = document.body.innerHTML;
+     
+          document.body.innerHTML = printContents;
+     
+          window.print();
+     
+          document.body.innerHTML = originalContents;
+     }
+      
+
+
+    
+
+    $(function () {
+      //Initialize Select2 Elements
+      $('.select2').select2()
+
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
+
+      //Datemask dd/mm/yyyy
+      $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+      //Datemask2 mm/dd/yyyy
+      $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+      //Money Euro
+      $('[data-mask]').inputmask()
+
+      //Date range picker
+      $('#reservationdate').datetimepicker({
+          format: 'L'
+      });
+      //Date range picker
+      $('#reservation').daterangepicker()
+      //Date range picker with time picker
+      $('#reservationtime').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+          format: 'MM/DD/YYYY hh:mm A'
+        }
+      })
+      //Date range as a button
+      $('#daterange-btn').daterangepicker(
+        {
+          ranges   : {
+            'Today'       : [moment(), moment()],
+            'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+            'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          },
+          startDate: moment().subtract(29, 'days'),
+          endDate  : moment()
+        },
+        function (start, end) {
+          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+        }
+      )
+
+      //Timepicker
+      $('#timepicker').datetimepicker({
+        format: 'LT'
+      })
+
+      //Bootstrap Duallistbox
+      $('.duallistbox').bootstrapDualListbox()
+
+      //Colorpicker
+      $('.my-colorpicker1').colorpicker()
+      //color picker with addon
+      $('.my-colorpicker2').colorpicker()
+
+      $('.my-colorpicker2').on('colorpickerChange', function(event) {
+        $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+      });
+
+      $("input[data-bootstrap-switch]").each(function(){
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+      });
+
+    })
+  </script>
+
+{% endblock javascripts %}

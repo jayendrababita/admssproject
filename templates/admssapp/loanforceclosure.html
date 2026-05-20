@@ -1,0 +1,240 @@
+{% extends "admssapp/base.html" %}
+
+{% block title %} admss {% endblock %} 
+
+<!-- Element injected in the BODY element -->
+{% block body_class %}  {% endblock body_class %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="/static/assets/plugins/daterangepicker/daterangepicker.css">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="/static/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="/static/assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="/static/assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="/static/assets/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="/static/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <!-- Bootstrap4 Duallistbox -->
+  <link rel="stylesheet" href="/static/assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+  <link rel="stylesheet" href="/static/assets/css/btnbootstrap.css">
+  <script src="/static/assets/js/bootstrap.bundle.js"></script>
+  <link rel="stylesheet" href="/static/assets/css/stylelockscreen.css">
+  <script src="/static/assets/js/stylelockscreen.js"></script>
+
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+
+{% endblock stylesheets %}
+
+{% block content %}    
+
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <div id="skm_LockPane" class="LockOff"></div>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-0">
+          <div class="col-sm-12">
+            <h4>Loan Force Closure Process</h4>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+   
+        
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="box-body">
+             <form  action="/loanforceclosure/" method="POST">
+                {% csrf_token %}
+                <div class="col-sm-12">
+                   <div class="row">
+            
+                      <div class="form-group" >
+                        <div class="col">
+                          <label style="margin-left:2px;" >Search Name</label>
+                          <input id="searchcheckbox"  type="checkbox" >
+                          <input class="form-control" type="search" id="searchBox" style="width: 210px;margin-left:2px;display: none;" autocomplete="off">
+                          <select id="loanid_name" name="loanidname" class="form-control"  style="width: 210px;margin-left:2px;">
+                          <option value="">Select</option>
+                          {% for all in nname %}
+                          <option value={{all.loanid}}> {{all.appname}}&nbsp&nbsp/&nbsp&nbsp{{all.appshoplocation}} </option>
+                          {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group" >
+                        <div class="col">
+                          <label for="loanid_name" style="margin-left:2px;" >Type Name</label>
+                          <input class="form-control" type="text" name="namesearch" id="namesearch" style="width: 250px;margin-left:2px;" onkeydown="upperCaseF(this)">
+                          <input class="form-control" type="hidden" name="loanidname" id="loanidname" style="width: 250px;margin-left:2px;" onkeydown="upperCaseF(this)">
+                        </div>
+                      </div>
+
+
+                  </div>
+                    
+          
+                   
+                      <div class="form-group">
+                        <button type="submit" id="submit" class="btn btn-info" style="margin-left:2px;width:90px;" disabled onclick="skm_LockScreen();" >Submit </button>
+                        <button type="button" id="cancel" class="btn btn-warning" onclick="location.href='/';"style="padding-left:0;padding-right:0;margin-left:2px;width:90px;">Cancel</button>
+
+                      </div>
+
+
+                   
+                     <br>
+
+                    
+                        <div id="mess">
+                        {% if messages %}
+                          {% for message in messages %}
+                           <label style="margin-left:1%;color: grey"><strong>{{message}}</strong></label>
+                          {% endfor %}
+                        {% endif %}
+                        </div>  
+                     
+          
+              </form>  
+            </div>
+          </div>
+        </div>
+        </div>
+    </section>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <!-- jQuery -->
+  <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Select2 -->
+  <script src="/static/assets/plugins/select2/js/select2.full.min.js"></script>
+  <!-- Bootstrap4 Duallistbox -->
+  <script src="/static/assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+  <!-- InputMask -->
+  <script src="/static/assets/plugins/moment/moment.min.js"></script>
+  <script src="/static/assets/plugins/inputmask/jquery.inputmask.min.js"></script>
+  <!-- date-range-picker -->
+  <script src="/static/assets/plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- bootstrap color picker -->
+  <script src="/static/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="/static/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <!-- Bootstrap Switch -->
+  <script src="/static/assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/static/assets/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <!-- Page script -->
+  <script>
+
+  
+          
+    
+        document.getElementById('loanid_name').onclick = function () {
+
+        document.getElementById("mess").disabled=true;
+        document.getElementById("mess").innerHTML = "     ";
+        }
+
+              
+        document.getElementById('loanid_name').onchange = function () {
+            var name = document.getElementById("loanid_name");
+
+            if (name.value != '') {
+
+              document.getElementById("submit").disabled=false;
+              document.getElementById("loanidname").disabled=true;  
+
+            } else {
+
+              document.getElementById("submit").disabled=true; 
+       
+            }
+ 
+          }
+
+
+              
+  function upperCaseF(a){
+    setTimeout(function(){
+      a.value = a.value.toUpperCase();
+        }, 1);
+    }  
+
+
+$(document).ready(function(){
+
+$("#namesearch").autocomplete({
+
+        source: "/autocomplete/",
+        minLength: 2,
+        open: function(){
+            setTimeout(function () {
+                $('.ui-autocomplete').css('z-index', 99);
+            }, 0);
+          }
+          
+      });
+
+});
+
+$("#namesearch").on('keyup', function (e) {
+  if (e.key === 'Enter' || e.keyCode === 13) {
+   var loanid =  $("#namesearch").val();
+   loanid = loanid.substr(-13, 13);
+   document.getElementById("submit").disabled=false;
+   document.getElementById("loanidname").value=loanid;
+  }
+});
+
+$(document).click(function(e) { 
+var loanid =  $("#namesearch").val();
+if(loanid !=''){
+  if (e.button == 0) {
+   var loanid =  $("#namesearch").val();
+   loanid = loanid.substr(-13, 13);
+   document.getElementById("submit").disabled=false;
+   document.getElementById("loanidname").value=loanid;
+   document.getElementById("loanid_name").disabled=true;  
+  }
+}
+});
+
+
+
+  </script>
+
+{% endblock javascripts %}

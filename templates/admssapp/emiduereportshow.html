@@ -1,0 +1,360 @@
+{% extends "admssapp/base.html" %}
+
+{% block title %} admss {% endblock %} 
+
+<!-- Element injected in the BODY element -->
+{% block body_class %}  {% endblock body_class %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="/static/assets/plugins/daterangepicker/daterangepicker.css">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="/static/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="/static/assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="/static/assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="/static/assets/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="/static/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <!-- Bootstrap4 Duallistbox -->
+  <link rel="stylesheet" href="/static/assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+  <link rel="stylesheet" href="/static/assets/css/btnbootstrap.css">
+  <script src="/static/assets/js/bootstrap.bundle.js"></script>
+
+  <style>
+  table,
+  th,
+  td {
+    border: .7px solid silver;
+    border-collapse: collapse;
+    padding: 5px;
+    text-align: left;
+    white-space: nowrap;
+     overflow: hidden;
+
+  }
+              
+  @page { size: landscape; }
+   
+</style>
+
+
+
+
+{% endblock stylesheets %}
+
+{% block content %}    
+
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-0">
+          <div class="col-sm-12">
+            <h4>EMI Due List</h4>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+   
+        
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="box-body">
+              <form  action="" method="POST">
+                {% csrf_token %}
+                <div class="col-sm-12">
+                   <div class="row">
+            
+        
+                         
+                      <div class="form-group" >
+                        <div class="col">
+                          <label style="margin-left:2px;" >Due Date</label>
+                          <input type="date" id="duedate" name="duedate" id="duedate"  value="{{fduedate|date:'Y-m-d'}}" class="form-control" style="height:35px;width:165px;margin-left:2px;" autocomplete="off" disabled>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col">
+                          <label style="margin-left:2px;">Recov. Officer</label>
+                          <select id="recovofficer" name="recovofficer" class="form-control" style="width:200px;margin-left:2px;">
+                            <option value={{frpersoncode}}> {{fpersonname}} </option>
+                          </select>
+                        </div>
+                      </div>
+
+            
+                    
+                    </div>
+                   </div>
+                    <br>
+                   
+                      <div class="form-group">
+                        <button type="button" id="submit" class="btn btn-info" onclick="location.href='/emiduereport/';" style="margin-left:10px;width:90px;" >Back </button>
+                        <button type="button" id="cancel" class="btn btn-warning" onclick="location.href='/';"style="margin-left:2px;width:90px;">Cancel</button>
+                        <button type="button" id="print" class="btn btn-secondary" onclick="divPrint('divName');" style="margin-left:2px;width:90px;">Print</button>
+
+                      </div>
+                   
+                     <br>
+
+                            
+          
+              </form>  
+            </div>
+          </div>
+        </div>
+        </div>
+    </section>
+
+
+    <section class="content">
+      <div class="container-fluid"  id="divName">
+   
+        
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="box-body">
+              <form  action="" method="POST">
+                {% csrf_token %} 
+             
+                  <p><strong>EMI Due List</strong></p>
+
+                    <table style="margin-top:10px;width:300px;" class="table table-bordered table table-sm table-responsive-sm">
+                      <tr>
+                        <th>Sn.</th>
+                        <th>Day</th>
+                        <th>Ac</th>
+                        <th>EMI</th>
+                    
+                      </tr>
+                    
+                      {% for a in bal %}
+                      <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{a.colldaychar}}</td>
+                        <td>{{a.totac}}</td>
+                        <td>{{a.totemi}}</td>
+                      </tr>
+                      {% endfor %}
+
+
+                      <tr>
+                        <td></td>
+                        <td><strong>Total EMI</strong></td>
+                        <td><strong>{{totac}}</strong></td>
+                        <td><strong>{{totemi}}</strong></td>
+                      </tr>
+
+
+                    </table>
+
+                    <div class="table-responsive-sm">
+                   <table style="width:1300px;">
+                      <tr>
+                        <th>Sn</th>
+                        <th>Name</th>
+                        <th>LoanID</th>
+                        <th>Location</th>
+                        <th>Last.EMI.Dep</th>
+                        <th>EMI.Due.Date</th>
+                        <th>EMI.Due.Day</th>
+                        <th>EMI Amt</th>
+                        <th>Mobile.No.</th>
+                        <th>EMI Coll.</th>
+                      </tr>
+                      <tr>
+                          {% for a in allr %}
+                          <tr>
+                            {% if a.delaydays3 < 2 %}
+
+                            <td style="color:black;">{{ forloop.counter }}</td>
+                            <td style="color:black;">{{a.appname}}</td>
+                            <td style="color:black;">{{a.loanid}}</td>
+                            <td style="color:black;">{{a.appshoplocation}}</td>
+                            <td style="color:black;">{{a.applastemidepdate|date:"d-m-Y"}}</td>
+                            <td style="color:black;">{{a.appemiduedate|date:"d-m-Y"}}</td>
+                            <td style="color:black;">{{a.colldaychar}}</td>
+                            <td style="color:black;">{{a.apploanemi}}</td>
+                            <td style="color:black;">{{a.appmobileno}}</td>
+                            <td style="color:black;">{{a.rpersonname}}</td>
+              
+                            {% else  %}
+
+                            <td style="color:crimson;">{{ forloop.counter }}</td>
+                            <td style="color:crimson;">{{a.appname}}</td>
+                            <td style="color:crimson;">{{a.loanid}}</td>
+                            <td style="color:crimson;">{{a.appshoplocation}}</td>
+                            <td style="color:crimson;">{{a.applastemidepdate|date:"d-m-Y"}}</td>
+                            <td style="color:crimson;">{{a.appemiduedate|date:"d-m-Y"}}</td>
+                            <td style="color:crimson;">{{a.colldaychar}}</td>
+                            <td style="color:crimson;">{{a.apploanemi}}</td>
+                            <td style="color:crimson;">{{a.appmobileno}}</td>
+                            <td style="color:crimson;">{{a.rpersonname}}</td>
+
+
+                           {% endif %}
+       
+             
+                          </tr>
+                        {% endfor %}
+                         </tr>
+                    </table>  
+                  </div>
+
+                    
+          
+                     
+          
+              </form>  
+            </div>
+          </div>
+        </div>
+        </div>
+    </section>
+
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <!-- jQuery -->
+  <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Select2 -->
+  <script src="/static/assets/plugins/select2/js/select2.full.min.js"></script>
+  <!-- Bootstrap4 Duallistbox -->
+  <script src="/static/assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+  <!-- InputMask -->
+  <script src="/static/assets/plugins/moment/moment.min.js"></script>
+  <script src="/static/assets/plugins/inputmask/jquery.inputmask.min.js"></script>
+  <!-- date-range-picker -->
+  <script src="/static/assets/plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- bootstrap color picker -->
+  <script src="/static/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="/static/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <!-- Bootstrap Switch -->
+  <script src="/static/assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/static/assets/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="/static/assets/js/demo.js"></script>
+  <!-- Page script -->
+  <script>
+
+    
+          
+    
+        
+      
+
+                function divPrint(divName) {
+                  var printContents = document.getElementById(divName).innerHTML;
+                  var originalContents = document.body.innerHTML;
+                  document.body.innerHTML = printContents;
+                  window.print();
+                  document.body.innerHTML = originalContents;
+                    }
+
+      
+    
+
+    $(function () {
+      //Initialize Select2 Elements
+      $('.select2').select2()
+
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
+
+      //Datemask dd/mm/yyyy
+      $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+      //Datemask2 mm/dd/yyyy
+      $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+      //Money Euro
+      $('[data-mask]').inputmask()
+
+      //Date range picker
+      $('#reservationdate').datetimepicker({
+          format: 'L'
+      });
+      //Date range picker
+      $('#reservation').daterangepicker()
+      //Date range picker with time picker
+      $('#reservationtime').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+          format: 'MM/DD/YYYY hh:mm A'
+        }
+      })
+      //Date range as a button
+      $('#daterange-btn').daterangepicker(
+        {
+          ranges   : {
+            'Today'       : [moment(), moment()],
+            'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+            'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          },
+          startDate: moment().subtract(29, 'days'),
+          endDate  : moment()
+        },
+        function (start, end) {
+          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+        }
+      )
+
+      //Timepicker
+      $('#timepicker').datetimepicker({
+        format: 'LT'
+      })
+
+      //Bootstrap Duallistbox
+      $('.duallistbox').bootstrapDualListbox()
+
+      //Colorpicker
+      $('.my-colorpicker1').colorpicker()
+      //color picker with addon
+      $('.my-colorpicker2').colorpicker()
+
+      $('.my-colorpicker2').on('colorpickerChange', function(event) {
+        $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+      });
+
+      $("input[data-bootstrap-switch]").each(function(){
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+      });
+
+    })
+  </script>
+
+{% endblock javascripts %}

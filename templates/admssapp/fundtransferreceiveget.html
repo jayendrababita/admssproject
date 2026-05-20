@@ -1,0 +1,355 @@
+{% extends "admssapp/base.html" %}
+
+{% block title %} admss {% endblock %} 
+
+<!-- Element injected in the BODY element -->
+{% block body_class %}  {% endblock body_class %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="/static/assets/plugins/daterangepicker/daterangepicker.css">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="/static/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="/static/assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="/static/assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="/static/assets/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="/static/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <!-- Bootstrap4 Duallistbox -->
+  <link rel="stylesheet" href="/static/assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+  <link rel="stylesheet" href="/static/assets/css/btnbootstrap.css">
+  <script src="/static/assets/js/bootstrap.bundle.js"></script>
+  <link rel="stylesheet" href="/static/assets/css/stylelockscreen.css">
+  <script src="/static/assets/js/stylelockscreen.js"></script>
+
+{% endblock stylesheets %}
+
+{% block content %}    
+
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <div id="skm_LockPane" class="LockOff"></div>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-0">
+          <div class="col-sm-12">
+            <h4>Fund Transfer (Receive)</h4>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="box-body">
+              <form  action="/fundtransferreceivecommit/" method="POST">
+                {% csrf_token %}
+                <div class="col-sm-12">
+                   <div class="row">
+
+ 
+                    <div class="form-group">
+                      <div class="col">
+                        <label style="margin-left:2px;">Select Transferred Fund To Receive</label>
+                        <select name="transferreceive" id="transferreceive" class="form-control" style="height:35px;width:250px;" autocomplete="off"
+                          required>
+                          <option value={{ftransid}}> {{flocationname}} / {{ffundtype}} / Rs.{{famount}} </option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col">
+                        <label style="margin-left:2px;">Fund From Location</label>
+                        <select name="location" id="location" class="form-control" style="height:35px;width:250px;"
+                          autocomplete="off" required>
+                          <option value={{flocationname}}> {{flocationname}} </option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col">
+                        <label style="margin-left:2px;">Fund Type</label>
+                        <select name="fundtype" id="fundtype" class="form-control" style="height:35px;width:175px;"
+                          autocomplete="off" required>
+                          <option value={{ffundtype}}> {{ffundtype}} </option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col">
+                        <label style="margin-left:2px;">Amount</label>
+                        <select name="amount" id="amount" class="form-control" style="height:35px;width:175px;" autocomplete="off"
+                          required>
+                          <option value={{famount}}> {{famount}} </option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col">
+                        <label style="margin-left:2px;">Fund Sending Date</label>
+                        <select name="date" id="date" class="form-control" style="height:35px;width:175px;" autocomplete="off"
+                          required>
+                          <option value={{fdate}}> {{fdate}} </option>
+                        </select>
+                      </div>
+                    </div>
+
+                    </div>
+                  </div>
+ 
+                  
+                  <div class="row">
+
+                  <div class="form-group">
+                     <div class="col">
+                        <label style="margin-left:10px;">Fund Transfer Mode</label>
+                          <select name="mode" id="mode" class="form-control" style="height:35px;width:175px;margin-left:8px;" autocomplete="off" required>
+                           <option value={{fmode}}> {{fmode}} </option>
+                          </select>
+                     </div>
+                  </div>
+
+                    <div class="form-group">
+                      <div class="col">
+                        <label style="margin-left:2px;">Select Bank a/c To Receive</label>
+                        <select name="bankac" id="bankac" class="form-control" style="height:35px;width:200px;"
+                          autocomplete="off" required>
+                          {% for all in allbank %}
+                          <option value={{all.bankac}}> {{all.bankac}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col">
+                        <label style="margin-left:2px;">Chq./Neft ID.</label>
+                        <input type="text" name="bankchq" id="bankchq" class="form-control" style="height:35px;width:150px;margin-left:2px;"
+                          autocomplete="off" disabled required>
+                      </div>
+                    </div>
+
+
+                  </div>
+
+
+              <br>        
+              <div class="custom-control custom-checkbox" style="margin-left:10px;">
+                  <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                  <label class="custom-control-label" for="defaultUnchecked">Confirm Receive Fund</label>
+              </div>
+              
+              <input name="clcash" id="clcash" type="hidden" value={{fclcash}}>         
+              <br>
+
+                <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <button type="submit" id="submit" name="show" class="btn btn-info" style="margin-left:10px;width:90px;" disabled onclick="skm_LockScreen();">Submit </button>
+                        <button type="button" id="cancel" class="btn btn-warning" onclick="location.href='/';"
+                          style="margin-left:2px;width:90px;">Cancel</button>
+                      </div>
+                   </div>
+                </div>
+    
+                <div id="mess">        
+  
+                 {% if messages %}
+                  {% for message in messages %}
+                  <label style="margin-left:35px;color: grey"><strong>{{message}}</strong></label>
+                  {% endfor %}
+                 {% endif %}
+
+                </div>
+                <br>
+
+              </form>  
+            </div>
+          </div>
+         </div>
+        </div>
+    </section>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <!-- jQuery -->
+  <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Select2 -->
+  <script src="/static/assets/plugins/select2/js/select2.full.min.js"></script>
+  <!-- Bootstrap4 Duallistbox -->
+  <script src="/static/assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+  <!-- InputMask -->
+  <script src="/static/assets/plugins/moment/moment.min.js"></script>
+  <script src="/static/assets/plugins/inputmask/jquery.inputmask.min.js"></script>
+  <!-- date-range-picker -->
+  <script src="/static/assets/plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- bootstrap color picker -->
+  <script src="/static/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="/static/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <!-- Bootstrap Switch -->
+  <script src="/static/assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/static/assets/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="/static/assets/js/demo.js"></script>
+  <!-- Page script -->
+  <script>
+
+    
+    $(function() {
+      $('.upper').keyup(function() {
+          this.value = this.value.toUpperCase();
+      });
+     });      
+
+
+
+         
+    document.getElementById('fundtype').onclick = function () {
+       document.getElementById("mess").disabled = true;
+       document.getElementById("mess").innerHTML = "     ";
+      }
+
+
+              
+    document.getElementById('defaultUnchecked').onchange = function () {
+        var ochk = document.getElementById("defaultUnchecked");
+
+        if (ochk.checked) {
+            document.getElementById("submit").disabled = false;
+         } else {
+            document.getElementById("defaultUnchecked").checked = false;
+            document.getElementById("submit").disabled = true;
+           }
+         }
+
+
+    if (document.getElementById("mode").value = "CASH") {
+        document.getElementById("bankac").disabled = true;
+        document.getElementById("bankac").value = '';
+       }
+
+        document.getElementById('mode').onclick = function () {
+
+          var omode = document.getElementById('mode');
+          var oomode = omode.value;
+          if (oomode == "BANK") {
+            document.getElementById("bankac").disabled = false;
+            document.getElementById("bankchq").disabled = false;
+
+          } else {
+            document.getElementById("bankac").disabled = true;
+            document.getElementById("bankchq").disabled = true;
+          }
+        }
+
+
+        document.getElementById('bankac').onchange = function () {
+            var obankac = document.getElementById("bankac");
+            document.getElementById("bankchq").value = "TRANSFER";
+            }
+
+
+
+    $(function () {
+      //Initialize Select2 Elements
+      $('.select2').select2()
+
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
+
+      //Datemask dd/mm/yyyy
+      $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+      //Datemask2 mm/dd/yyyy
+      $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+      //Money Euro
+      $('[data-mask]').inputmask()
+
+      //Date range picker
+      $('#reservationdate').datetimepicker({
+          format: 'L'
+      });
+      //Date range picker
+      $('#reservation').daterangepicker()
+      //Date range picker with time picker
+      $('#reservationtime').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+          format: 'MM/DD/YYYY hh:mm A'
+        }
+      })
+      //Date range as a button
+      $('#daterange-btn').daterangepicker(
+        {
+          ranges   : {
+            'Today'       : [moment(), moment()],
+            'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+            'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          },
+          startDate: moment().subtract(29, 'days'),
+          endDate  : moment()
+        },
+        function (start, end) {
+          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+        }
+      )
+
+      //Timepicker
+      $('#timepicker').datetimepicker({
+        format: 'LT'
+      })
+
+      //Bootstrap Duallistbox
+      $('.duallistbox').bootstrapDualListbox()
+
+      //Colorpicker
+      $('.my-colorpicker1').colorpicker()
+      //color picker with addon
+      $('.my-colorpicker2').colorpicker()
+
+      $('.my-colorpicker2').on('colorpickerChange', function(event) {
+        $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+      });
+
+      $("input[data-bootstrap-switch]").each(function(){
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+      });
+
+    })
+  </script>
+
+{% endblock javascripts %}

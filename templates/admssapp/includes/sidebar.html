@@ -1,0 +1,680 @@
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a class="brand-link">
+      <img src="/static/assets/img/admss.gif" alt="ADMSS" class="brand-image" style="opacity: .8">
+      <span class="brand-text font-weight-heavy" style="color:silver;"><strong>A</strong></span>
+      <span class="brand-text font-weight-heavy" style="color:silver;"><strong>D</strong></span>
+      <span class="brand-text font-weight-heavy" style="color:silver;"><strong>M</strong></span>
+      <span class="brand-text font-weight-heavy" style="color:silver;"><strong>S</strong></span>
+      <span class="brand-text font-weight-heavy" style="color:silver"><strong>S</strong></span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="info">
+          <a class="d-block">
+            {{loginlocationname}} - {{loginrundate}}
+          </a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="" placeholder="Action" aria-label="" >
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library 
+  
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Widgets
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>-->
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <span class="badge badge-info right">7</span>
+              <p>
+                Loan Master
+                <i class="fas fa-angle-left right"></i>
+      
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/newloan/" class="nav-link">
+                  <i class="nav-icon fas fa-copy text-info"></i>
+                  <p>New Loan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/loansettlement/" class="nav-link">
+                  <i class="nav-icon fas fa-copy text-warning"></i>
+                  <p>Settle Loan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/loanforceclosure/" class="nav-link">
+                  <i class="nav-icon fas fa-copy text-danger"></i>
+                  <p>Force Closure</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/loanmaster/" class="nav-link">
+                  <i class="nav-icon fas fa-copy text-primary"></i>
+                  <p>Loan Master</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/updatemaster/" class="nav-link">
+                  <i class="nav-icon fas fa-copy text-warning"></i>
+                  <p>Update Master</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/noccertificate/" class="nav-link">
+                  <i class="nav-icon fas fa-copy text-success"></i>
+                  <p>NOC Certificates</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/emicalculator/" class="nav-link">
+                  <i class="nav-icon fas fa-copy text-info"></i>
+                  <p>EMI Calculator</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/loaninsurclaim/" class="nav-link">
+                  <i class="nav-icon fas fa-copy text-success"></i>
+                  <p>Loan Insurance Claim</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/loaninsurfundreceive/" class="nav-link">
+                  <i class="nav-icon fas fa-copy text-warning"></i>
+                  <p>Loan Insurance Fund Receive</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <span class="badge badge-warning right">4</span>
+              <p>
+                EMI Deposit
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/emideposit/" class="nav-link">
+                  <i class="nav-icon fas fa-chart-pie text-info"></i>
+                  <p>Normal EMI</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/groupemideposit/" class="nav-link">
+                  <i class="nav-icon fas fa-chart-pie text-danger"></i>
+                  <p>Group EMI</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/collemidepositbranch/" class="nav-link">
+                  <i class="nav-icon fas fa-chart-pie text-warning"></i>
+                  <p>Collector EMI</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/emispecialdeposit/" class="nav-link">
+                  <i class="nav-icon fas fa-chart-pie text-warning"></i>
+                  <p>SPECIAL EMI</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/emisundry/" class="nav-link">
+                  <i class="nav-icon fas fa-chart-pie text-secondary"></i>
+                  <p>Sundry EMI</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/emisundryprocess/" class="nav-link">
+                  <i class="nav-icon fas fa-chart-pie text-info"></i>
+                  <p>Process Sundry EMI</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                 <a href="/emireceipt/" class="nav-link">
+                  <i class="nav-icon fas fa-chart-pie text-success"></i>
+                  <p>Print EMI Receipt</p>
+                 </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-edit"></i>
+              <span class="badge badge-success right">18</span>
+              <p>
+                Reports
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+
+
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/collemireportbranch/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-warning"></i>
+                  <p>Collector EMI</p>
+                </a>
+              </li>         
+              <li class="nav-item">
+                <a href="/emiduereport/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-danger"></i>
+                  <p>Due EMI</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/emidepositreport/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-info"></i>
+                  <p>Deposit EMI</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/newloanreport/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-warning"></i>
+                  <p>New Loans</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/settledloanreport/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-warning"></i>
+                  <p>Settled Loans</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/nearsettlereport/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-warning"></i>
+                  <p>Loans Near Settle</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/loanledger/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-info"></i>
+                  <p>Loan Ledger Normal</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/loanledgersettlement/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-info"></i>
+                  <p>Loan Ledger Settlement</p>
+                </a>
+              </li>
+      
+              <li class="nav-item">
+                <a href="/transreport/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-danger"></i>
+                  <p>Trans. Summary</p>
+                </a>
+              </li>              
+              <li class="nav-item">
+                <a href="/loanstatistics/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-danger"></i>
+                  <p>Loan Statistics</p>
+                </a>
+              </li>    
+              <li class="nav-item">
+                <a href="/comprativeloanstatistics/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-danger"></i>
+                  <p>Comp. Loan Statistics</p>
+                </a>
+              </li>  
+                      
+              <li class="nav-item">
+                <a href="/loanidadminsummary/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-warning"></i>
+                  <p>EMI Admin Summary</p>
+                </a>
+              </li>   
+              <li class="nav-item">
+                <a href="/loanidadminwiselist/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-warning"></i>
+                  <p>EMI Admin Loan Status</p>
+                </a>
+              </li> 
+              <li class="nav-item">
+                <a href="/loanidcollectorsummary/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-primary"></i>
+                  <p>EMI Collector Summary</p>
+                </a>
+              </li>   
+   
+              <li class="nav-item">
+                <a href="/emicollectorwisependinglist/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-primary"></i>
+                  <p>EMI Collector Loan Status</p>
+                </a>
+              </li>   
+             
+              <li class="nav-item">
+                <a href="/emicollectorwiselist/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-primary"></i>
+                  <p>EMI Collector Loan List</p>
+                </a>
+              </li>                            
+
+              <li class="nav-item">
+                <a href="/emisummarywiselist/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-primary"></i>
+                  <p>EMI Collector Summary</p>
+                </a>
+              </li>                            
+              <li class="nav-item">
+                <a href="/groupwiselist/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-info"></i>
+                  <p>Group Wise Loan List</p>
+                </a>
+              </li>  
+              <li class="nav-item">
+                <a href="/emidefaultreport/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-primary"></i>
+                  <p>EMI Default Report</p>
+                </a>
+              </li>   
+              <li class="nav-item">
+                <a href="/associatereport/" class="nav-link">
+                  <i class="nav-icon far fa-edit text-success"></i>
+                  <p>Associate Report</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-file-signature"></i>
+              <span class="badge badge-warning right">6</span>
+              <p>
+                Payments
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+                 
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/miscpayment/" class="nav-link">
+                  <i class="nav-icon fas fa-file-signature text-warning"></i>
+                  <p>Misc Payments</p>
+                </a>
+              </li>
+              {% if loginstatus == 'A' %}
+              <li class="nav-item">
+                <a href="/authcenterexpensepayment/" class="nav-link">
+                  <i class="nav-icon fas fa-file-signature text-warning"></i>
+                  <p>Auth. Centre Expense</p>
+                </a>
+              </li>
+              {% endif %}
+
+              <li class="nav-item">
+                 <a href="/miscpaymentreport/" class="nav-link">
+                 <i class="nav-icon fas fa-file-signature text-info"></i>
+                 <p>Misc Payment Report</p>
+                 </a>
+              </li>
+              <li class="nav-item">
+                <a href="/miscsummaryreport/" class="nav-link">
+                  <i class="nav-icon fas fa-file-signature text-success"></i>
+                  <p>Misc Payment Summary</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/assoexppayment/" class="nav-link">
+                  <i class="nav-icon fas fa-file-signature text-warning"></i>
+                  <p>Asso.Exp.Payments</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                 <a href="/assoexppaymentreport/" class="nav-link">
+                 <i class="nav-icon fas fa-file-signature text-info"></i>
+                 <p>Asso.Exp.Payment Report</p>
+                 </a>
+              </li>
+
+
+              <li class="nav-item">
+                <a href="/miscvoucharprint/" class="nav-link">
+                  <i class="nav-icon fas fa-landmark text-info"></i>
+                  <p>Payment Vouchar Print</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-address-card"></i>
+              <span class="badge badge-info right"> 3 </span>
+              <p>
+                Advances
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+                 
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/advancepayment/" class="nav-link">
+                  <i class="nav-icon fas fa-address-card text-warning"></i>
+                  <p>Advance Payments</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/advancepaymentcredit/" class="nav-link">
+                  <i class="nav-icon fas fa-address-card text-info"></i>
+                  <p>Advance Recovery</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                 <a href="#" class="nav-link">
+                 <i class="nav-icon fas fa-address-card text-success"></i>
+                 <p>Advance Payment Report</p>
+                 </a>
+              </li>
+            </ul>
+          </li>
+
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-landmark"></i>
+              <span class="badge badge-danger right"> 6 </span>
+              <p>
+                Bank Trans.
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+     
+              <li class="nav-item">
+                <a href="/banktrans/" class="nav-link">
+                  <i class="nav-icon fas fa-landmark text-danger"></i>
+                  <p>Deposit/Withdrawl</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/banktransac/" class="nav-link">
+                  <i class="nav-icon fas fa-landmark text-danger"></i>
+                  <p>Transfer to a/c</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/bankcharges/" class="nav-link">
+                  <i class="nav-icon fas fa-landmark text-warning"></i>
+                  <p>Bank Charges</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/bankintrest/" class="nav-link">
+                  <i class="nav-icon fas fa-landmark text-warning"></i>
+                  <p>Bank Intrest</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                  <a href="/bankdishonor/" class="nav-link">
+                  <i class="nav-icon fas fa-landmark text-danger"></i>
+                  <p>Dishonor Charges</p>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/banktransreport/" class="nav-link">
+                  <i class="nav-icon fas fa-landmark text-info"></i>
+                  <p>Bank Transaction Report</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/bankvoucharprint/" class="nav-link">
+                  <i class="nav-icon fas fa-landmark text-info"></i>
+                  <p>Bank Vouchar Print</p>
+                </a>
+              </li>
+
+
+            </ul>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-rupee-sign"></i>
+              <span class="badge badge-warning right">7</span>
+              <p>
+                Funds
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+     
+              <li class="nav-item">
+                <a href="/fundin/" class="nav-link">
+                  <i class="nav-icon fas fa-rupee-sign text-warning"></i>
+                  <p>Funds In</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/fundinoth/" class="nav-link">
+                  <i class="nav-icon fas fa-rupee-sign text-danger"></i>
+                  <p>FundsIn Oth</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/fundout/" class="nav-link">
+                  <i class="nav-icon fas fa-rupee-sign text-warning"></i>
+                  <p>Funds Out</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/fundloan/" class="nav-link">
+                  <i class="nav-icon fas fa-rupee-sign text-warning"></i>
+                  <p>Funds Loan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/fundloanrecovery/" class="nav-link">
+                  <i class="nav-icon fas fa-rupee-sign text-success"></i>
+                  <p>Funds Loan Recov.</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                  <a href="/fundpayment/" class="nav-link">
+                  <i class="nav-icon fas fa-rupee-sign text-danger"></i>
+                  <p>MIS Payment Investor</p>
+                  </a>
+               </li>
+               <li class="nav-item">
+                  <a href="/fundactivereport/" class="nav-link">
+                    <i class="nav-icon fas fa-rupee-sign text-info"></i>
+                    <p>Active Fund</p>
+                  </a>
+                </li>
+               <li class="nav-item">
+                  <a href="/fundmisactivereport/" class="nav-link">
+                    <i class="nav-icon fas fa-rupee-sign text-info"></i>
+                    <p>Active MIS Fund</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                   <a href="/emifundtransactionreport/" class="nav-link">
+                   <i class="nav-icon fas fa-rupee-sign text-info"></i>
+                   <p>MIS Fund Report</p>
+                   </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="/fundtransactionreport/" class="nav-link">
+                    <i class="nav-icon fas fa-rupee-sign text-info"></i>
+                    <p>Fund Trans. Report</p>
+                  </a>
+                </li>
+
+            </ul>
+          </li>
+
+
+          
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-th-large"></i>
+              <span class="badge badge-success right"> 3 </span>
+              <p>
+                Generated Fund 
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+          
+              <li class="nav-item">
+                <a href="/fundtransfersend/" class="nav-link">
+                  <i class="nav-icon fas fa-th-large text-warning"></i>
+                  <p>Fund Send Generated</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/fundtransferreceive/" class="nav-link">
+                  <i class="nav-icon fas fa-th-large text-danger"></i>
+                  <p>Fund Receive Generated</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/fundtransfersendreceivereport/" class="nav-link">
+                  <i class="nav-icon fas fa-th-large text-info"></i>
+                  <p>Fund Reports Generated</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-folder-open"></i>
+              <span class="badge badge-success right"> 3 </span>
+              <p>
+                Normal Fund 
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+          
+              <li class="nav-item">
+                <a href="/fundtransfersendnormal/" class="nav-link">
+                  <i class="nav-icon fas fa-folder-open text-warning"></i>
+                  <p>Fund Send Normal</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/fundtransferreceivenormal/" class="nav-link">
+                  <i class="nav-icon fas fa-folder-open text-danger"></i>
+                  <p>Fund Receive Normal</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/fundtransfersendreceivereport/" class="nav-link">
+                  <i class="nav-icon fas fa-folder-open text-info"></i>
+                  <p>Fund Reports Normal</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chalkboard-teacher"></i>
+              <span class="badge badge-warning right"> 3 </span>
+              <p>
+                Send whatsapp/sms 
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+          
+              <li class="nav-item">
+                <a href="/whatsappdaydata/" class="nav-link">
+                  <i class="nav-icon fas fa-chalkboard-teacher text-warning"></i>
+                  <p>Prepare Message Data</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/whatsappmessage/" class="nav-link">
+                  <i class="nav-icon  fas fa-chalkboard-teacher text-danger"></i>
+                  <p>Send whatsapp Message</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chalkboard-teacher"></i>
+              <span class="badge badge-warning right"> 3 </span>
+              <p>
+                Loan Leads 
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+          
+              <li class="nav-item">
+                <a href="/loanleadnew/" class="nav-link">
+                  <i class="nav-icon fas fa-chalkboard-teacher text-warning"></i>
+                  <p>Loan Leads</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/loanleadreport/" class="nav-link">
+                  <i class="nav-icon  fas fa-chalkboard-teacher text-danger"></i>
+                  <p>Loan Leads Report</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>          
+
+     
+          <li class="nav-header">Log</li>
+          <li class="nav-item">
+            <a href="/logout/" class="nav-link">
+              <i class="nav-icon far fa-circle text-danger"></i>
+              <p class="text">Logout</p>
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+  

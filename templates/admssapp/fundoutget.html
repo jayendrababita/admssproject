@@ -1,0 +1,381 @@
+{% extends "admssapp/base.html" %}
+
+{% block title %} admss {% endblock %} 
+
+<!-- Element injected in the BODY element -->
+{% block body_class %}  {% endblock body_class %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="/static/assets/plugins/daterangepicker/daterangepicker.css">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="/static/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="/static/assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="/static/assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="/static/assets/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="/static/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <!-- Bootstrap4 Duallistbox -->
+  <link rel="stylesheet" href="/static/assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+  <link rel="stylesheet" href="/static/assets/css/btnbootstrap.css">
+  <script src="/static/assets/js/bootstrap.bundle.js"></script>
+  <link rel="stylesheet" href="/static/assets/css/stylelockscreen.css">
+  <script src="/static/assets/js/stylelockscreen.js"></script>
+
+{% endblock stylesheets %}
+
+{% block content %}    
+
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <div id="skm_LockPane" class="LockOff"></div>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-0">
+          <div class="col-sm-12">
+            <h4>Fund Transactions</h4>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+   
+        
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="box-body">
+              <form  action="/investorpaymentfundcommit/" method="POST">
+                {% csrf_token %}
+                <div class="col-sm-12">
+                   <div class="row">
+                     <div class="form-group" >
+                        <div class="col">
+                            <label style="margin-left:2px;" >Deposit/WithDrawl</label>
+                            <select id="transtype" name="transtype" class="form-control"  style="width: 200px;margin-left:2px;">
+                            <option value="FUNDOUT">Fund Out</option>
+                           </select>
+                        </div>
+                      </div>
+
+                      <div class="form-group" >
+                        <div class="col">
+                          <label style="margin-left:2px;" >Investor Name</label>
+                          <select id="personcode" name="personcode" class="form-control"  style="width: 200px;margin-left:2px;"autocomplete="off" required>
+                          <option value={{fpersoncode}}>{{fpersonname}}</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="form-group" >   
+                        <div class="col"> 
+                          <label style="margin-left:2px;">Fund Description</label>
+                          <select name="fundcode" id="fundcode" class="form-control"  style="height:35px;width:155px;" autocomplete="off" required>
+                            <option value={{ftranscd}}> {{ftransnm}} </option>
+                          </select>
+                        </div>
+                      </div>    
+                    <div class="form-group" >
+                      <div class="col">
+                        <label style="margin-left:2px;" id="labelclcashbank">Cash/Bank</label>
+                        <input type="text" id="clcashbank" name="clcashbank"   class="form-control"  style="height:35px;font-size:20px;width:120px;margin-left:2px;text-align:center;" readonly>
+                      </div>
+                    </div>
+
+                    <div class="form-group" >
+                      <div class="col">
+                        <label style="margin-left:2px;" id="labelclcashbank">Fund Type</label>
+                        <input type="text" id="mis" name="mis"  value="{{ffundtype}}" class="form-control"  style="height:35px;width:80px;margin-left:2px;text-align:center;" readonly>
+                      </div>
+                    </div>
+
+                    </div>
+                  </div>
+       
+                  <div class="col-sm-12">
+                    <div class="row">
+
+                      <div class="form-group" >
+                        <div class="col">
+                          <label style="margin-left:2px;" >Invest Amount</label>
+                          <input type="text" id="investamount" name="investamount" min="1" value={{famount}} class="form-control"  style="height:35px;font-size:20px;width:100px;margin-left:2px;text-align:center;" readonly autocomplete="off"> 
+                         </div>
+                      </div>
+                      <div class="form-group" >
+                        <div class="col">
+                          <label style="margin-left:2px;" >Pay Amount</label>
+                          <input type="text" id="cashrec" name="cashrec"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"  value={{fpayamt}} class="form-control"  style="height:35px;font-size:20px;width:100px;margin-left:2px;text-align:center;" autocomplete="off"> 
+                         </div>
+                      </div>
+
+                      <div class="form-group" >
+                        <div class="col">
+                          <label style="margin-left:2px;" >Intrest</label>
+                          <input type="text" id="intrest" name="intrest" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"  value={{fintrest}} class="form-control"  style="height:35px;font-size:20px;width:100px;margin-left:2px;text-align:center;" autocomplete="off"> 
+                         </div>
+                      </div>
+
+                      <div class="form-group" >
+                        <div class="col">
+                            <label style="margin-left:2px;" >Amount Type</label>
+                            <select id="paytype" name="paytype" class="form-control"  style="width: 110px;margin-left:2px;">
+                            <option >Select</option>
+                            <option value="Both">Both</option>
+                            <option value="Principal">Principal</option>
+                            <option value="Intrest">Intrest</option>
+                           </select>
+                        </div>
+                      </div>
+
+                     <div class="form-group" >
+                      <div class="col">
+                          <label style="margin-left:2px;" >Payment Mode</label>
+                          <select id="paymode" name="paymode" class="form-control"  style="width: 110px;margin-left:2px;">
+                          <option >Select</option>
+                          <option value="CASH">CASH</option>
+                          <option value="BANK">BANK</option>
+                         </select>
+                      </div>
+                    </div>
+                   
+                     <div class="form-group" >   
+                      <div class="col"> 
+                        <label style="margin-left:2px;">Bank A/C</label>
+                        <select name="appbankac" id="appbankac" class="form-control"  style="height:35px;width:155px;" autocomplete="off" disabled required>
+                          <option value="">Select</option>
+                          {% for bank in allbank %}
+                          <option value={{bank.bankac}}> {{bank.bankac}}-Rs.{{bank.clbank}} </option>
+                          {% endfor %}
+                         </select>
+                      </div>
+                    </div>    
+
+
+                    <div class="form-group">    
+                      <div class="col">   
+                        <label style="margin-left:2px;">Chq./Neft ID.</label>
+                        <input type="text" name="appbankchq" id="appbankchq"  class="upper form-control" style="height:35px;width:150px;margin-left:2px;" autocomplete="off" disabled required>
+                      </div>
+                    </div>     
+
+                    </div>
+                  </div>
+          
+                   <input name="clcash" id="clcash" type="hidden" value={{clcash}}> 
+                   <input name="clbank" id="clbank" type="hidden" value={{clbank}}> 
+                   <input name="transid" id="transid" type="hidden" value={{ftransid}}>    
+                   <input name="oprincipal" id="oprincipal" type="hidden" value={{famount}}>    
+                   <input name="ointrest" id="ointrest" type="hidden" value={{fintrest}}>                                  
+            
+                <br>
+
+                <div class="row">
+                  <div class="form-group" >
+                    <div class="col">
+
+                     <div class="custom-control custom-checkbox" style="margin-left:10px;">
+                       <input type="checkbox" name="checkbox" class="custom-control-input" id="defaultUnchecked" >
+                      <label class="custom-control-label" for="defaultUnchecked">Confirm Fund Transaction</label>
+                    </div>
+                </div> 
+              </div> 
+            </div> 
+
+            <br>
+
+                <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <button type="submit" id="submit" name="show" class="btn btn-info" style="margin-left:10px;width:90px;" disabled onclick="skm_LockScreen();">Submit </button>
+                        <button type="button" id="cancel" class="btn btn-warning" onclick="location.href='/';"style="margin-left:2px;width:90px;">Cancel</button>
+                      </div>
+                   </div>
+                </div>
+                   
+                    
+                <div id="mess">        
+  
+                 {% if messages %}
+                  {% for message in messages %}
+                  <label style="margin-left:1%;color: grey"><strong>{{message}}</strong></label>
+                  {% endfor %}
+                 {% endif %}
+
+                </div>
+         
+
+              </form>  
+            </div>
+          </div>
+        </div>  
+
+    </section>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <!-- jQuery -->
+  <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Select2 -->
+  <script src="/static/assets/plugins/select2/js/select2.full.min.js"></script>
+  <!-- Bootstrap4 Duallistbox -->
+  <script src="/static/assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+  <!-- InputMask -->
+  <script src="/static/assets/plugins/moment/moment.min.js"></script>
+  <script src="/static/assets/plugins/inputmask/jquery.inputmask.min.js"></script>
+  <!-- date-range-picker -->
+  <script src="/static/assets/plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- bootstrap color picker -->
+  <script src="/static/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="/static/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <!-- Bootstrap Switch -->
+  <script src="/static/assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/static/assets/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="/static/assets/js/demo.js"></script>
+  <!-- Page script -->
+  <script>
+
+    
+    $(function() {
+      $('.upper').keyup(function() {
+          this.value = this.value.toUpperCase();
+      });
+     });      
+
+
+    
+        document.getElementById('transtype').onclick = function () {
+
+        document.getElementById("mess").disabled=true;
+        document.getElementById("mess").innerHTML = "     ";
+        }
+
+  
+        document.getElementById('cashrec').onchange = function () {
+          var invamt = document.getElementById('investamount').value
+          var payamt = document.getElementById('cashrec').value
+          
+          invamt = parseInt(invamt, 10)
+          payamt = parseInt(payamt, 10)
+
+
+          if (payamt > invamt) {
+            alert("Payment amount can't greater than invested amount" )
+            document.getElementById('cashrec').value = invamt
+           }
+           
+        }        
+
+        
+        document.getElementById('paytype').onchange = function () {
+          iintrest = document.getElementById("ointrest").value;
+          iprincipal = document.getElementById("oprincipal").value;
+
+
+          var epaytype = document.getElementById('paytype')
+
+          if (epaytype.value=='Principal'){
+
+            document.getElementById("intrest").value = 0; 
+
+           }else if (epaytype.value=='Intrest'){
+
+            document.getElementById("cashrec").value = 0; 
+            document.getElementById("intrest").value = iintrest; 
+
+     
+          }else if (epaytype.value=='Both'){
+
+           // document.getElementById("cashrec").value = iprincipal; 
+            document.getElementById("intrest").value = iintrest; 
+
+          }
+            }
+
+
+        document.getElementById('paymode').onchange = function () {
+          var emode = document.getElementById('paymode')
+          var ochq = document.getElementById('appbankchq')
+          if (emode.value=='BANK'){
+            document.getElementById('appbankac').disabled=false;
+            document.getElementById('appbankchq').disabled=false;
+            clbank = document.getElementById("clbank").value;
+            document.getElementById("clcashbank").value = clbank;      
+            document.getElementById("labelclcashbank").innerHTML = "Cl Bank";
+           }else {
+            document.getElementById('appbankac').disabled=true;
+            document.getElementById('appbankchq').disabled=true;
+            clcash = document.getElementById("clcash").value;
+            document.getElementById("clcashbank").value = clcash;
+            document.getElementById("labelclcashbank").innerHTML = "Cl Cash";
+           }
+        }
+
+        document.getElementById('appbankac').onchange = function () {
+               var obankac = document.getElementById("bankac");
+              document.getElementById("appbankchq").value = "TRANSFER";
+            }
+
+    
+        document.getElementById('defaultUnchecked').onchange = function () {
+          var ochk = document.getElementById("defaultUnchecked");
+          var emode = document.getElementById('paymode').value
+          var ecash = document.getElementById('cashrec').value
+          var ochq = document.getElementById('appbankchq')
+          var clcash = parseInt(document.getElementById('clcash').value)
+          var clbank = parseInt(document.getElementById('clbank').value)
+          document.getElementById('submit').disabled=true;
+
+
+          if (emode == "CASH"){
+           if (clcash >= ecash) {
+           document.getElementById("defaultUnchecked").checked=true;
+           document.getElementById("submit").disabled=false;
+           } else {
+            document.getElementById("defaultUnchecked").checked=false;
+            document.getElementById("submit").disabled=true;
+            alert("No sufficient Cash Balance")
+            }
+          } else if (emode == "BANK"){
+           if (clbank >= ecash) {
+           document.getElementById("defaultUnchecked").checked=true;
+           document.getElementById("submit").disabled=false;
+           } else {
+            document.getElementById("defaultUnchecked").checked=false;
+            document.getElementById("submit").disabled=true;
+            alert("No sufficient Bank Balance")
+             }
+           }
+
+        }
+      
+
+
+  </script>
+
+{% endblock javascripts %}

@@ -1,0 +1,48 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="icon" href="{% static '/assets/admssfevicon.ico' %}" type="image/x-icon">
+  {% include 'includes/pwa_head.html' %}
+
+  <title>
+     {% block title %}{% endblock %} 
+  </title> 
+
+  {% block stylesheets %}{% endblock stylesheets %}
+  <link rel="stylesheet" href="{% static 'assets/css/admss-mobile-sidebar.css' %}">
+
+</head>
+<!-- <body class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto;-->
+<body class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto; {% block body_class %} {% endblock body_class %}">
+
+  <div class="wrapper">
+
+    {% include 'admssapp/includes/navigation.html' %}
+
+    {% include 'admssapp/includes/sidebar.html' %}
+
+    {% block content %}{% endblock content %}
+
+    {% include 'admssapp/includes/footer.html' %}
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+
+</div>
+<!-- ./wrapper -->
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+<script src="{% static 'assets/js/admss-mobile-sidebar.js' %}"></script>
+{% include 'includes/pwa_scripts.html' %}
+
+</body>
+</html>
