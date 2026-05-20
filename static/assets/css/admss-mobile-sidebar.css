@@ -1,10 +1,37 @@
 /**
- * Mobile sidebar scroll (Chrome / small phones).
+ * ADMSS sidebar + mobile layout fixes
  * AdminLTE: .main-sidebar > .sidebar > nav
  */
 
 html {
   height: -webkit-fill-available;
+}
+
+/* Native scroll on sidebar (all screen sizes) */
+.layout-fixed .main-sidebar {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.layout-fixed .main-sidebar .brand-link {
+  flex: 0 0 auto;
+}
+
+.layout-fixed .main-sidebar .sidebar {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
+  padding-bottom: 1.5rem;
+}
+
+/* Navbar offset breaks scroll area inside full-height mobile sidebar */
+.layout-navbar-fixed.layout-fixed .wrapper .main-sidebar .sidebar {
+  margin-top: 0 !important;
 }
 
 @media (max-width: 991.98px) {
@@ -31,7 +58,6 @@ html {
     bottom: 0;
     height: 100dvh;
     height: 100vh;
-    height: -webkit-fill-available;
     max-height: 100dvh;
     width: 250px;
     max-width: 250px;
@@ -50,27 +76,6 @@ html {
     min-height: 0;
     height: auto !important;
     max-height: none !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: contain;
-    touch-action: pan-y;
-  }
-
-  /* AdminLTE overlayScrollbars breaks touch scroll on small phones */
-  .main-sidebar .sidebar.os-host,
-  .main-sidebar .sidebar.os-host-overflow,
-  .main-sidebar .sidebar .os-viewport,
-  .main-sidebar .sidebar .os-content {
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    height: 100% !important;
-    max-height: 100% !important;
-    touch-action: pan-y;
-  }
-
-  .main-sidebar .sidebar .os-scrollbar {
-    display: none !important;
   }
 
   body.sidebar-open {
@@ -84,7 +89,6 @@ html {
     margin-left: -250px !important;
   }
 
-  /* position:fixed on body blocks sidebar scroll on small Chrome */
   @media (max-width: 576px) {
     body.sidebar-open {
       position: relative;
@@ -98,7 +102,7 @@ html {
     }
 
     .main-sidebar .sidebar {
-      padding-bottom: calc(env(safe-area-inset-bottom, 16px) + 56px);
+      padding-bottom: calc(env(safe-area-inset-bottom, 16px) + 48px);
     }
   }
 }

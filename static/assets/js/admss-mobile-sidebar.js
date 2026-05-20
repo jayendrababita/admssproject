@@ -1,20 +1,16 @@
 /**
- * On phones/tablets: remove overlayScrollbars from sidebar so native touch scroll works.
+ * Use native sidebar scroll instead of AdminLTE overlayScrollbars
+ * (overlayScrollbars often blocks touch scroll on phones).
  */
 (function ($) {
   'use strict';
 
-  function isMobileLayout() {
-    return window.matchMedia('(max-width: 991.98px)').matches;
-  }
-
   function destroySidebarOverlayScrollbars() {
-    if (!isMobileLayout() || typeof $.fn.overlayScrollbars === 'undefined') {
+    if (typeof $.fn.overlayScrollbars === 'undefined') {
       return;
     }
 
-    var $sidebar = $('.main-sidebar .sidebar');
-    $sidebar.each(function () {
+    $('.main-sidebar .sidebar').each(function () {
       var $el = $(this);
       try {
         if ($el.hasClass('os-host')) {
@@ -26,16 +22,56 @@
     });
   }
 
-  function runFix() {
+  function enableNativeSidebarScroll() {
     destroySidebarOverlayScrollbars();
+
+    $('.main-sidebar .sidebar').each(function () {
+      this.style.overflowY = 'auto';
+      this.style.overflowX = 'hidden';
+      this.style.webkitOverflowScrolling = 'touch';
+    });
   }
 
-  $(runFix);
-  $(window).on('load', function () {
+  function runFix() {
+    enableNativeSidebarScroll();
+  }
+
+  function scheduleFixes() {
     runFix();
-    setTimeout(runFix, 300);
-    setTimeout(runFix, 1000);
+    setTimeout(runFix, 100);
+    setTimeout(runFix, 400);
+    setTimeout(runFix, 1200);
+  }
+
+  $(scheduleFixes);
+  $(window).on('load resize', scheduleFixes);
+  $(document).on(
+    'expanded.lte.pushmenu collapsed.lte.pushmenu shown.lte.pushmenu',
+    scheduleFixes
+  );
+  $(document).on('click', '[data-widget="pushmenu"]', function () {
+    setTimeout(scheduleFixes, 50);
+    setTimeout(scheduleFixes, 300);
   });
-  $(window).on('resize', runFix);
-  $(document).on('expanded.lte.pushmenu collapsed.lte.pushmenu', runFix);
+
+  /* AdminLTE Layout re-applies overlayScrollbars after resize */
+  if (window.MutationObserver) {
+    var observer = new MutationObserver(function (mutations) {
+      for (var i = 0; i < mutations.length; i++) {
+        var m = mutations[i];
+        if (m.type === 'attributes' && m.attributeName === 'class') {
+          var t = m.target;
+          if (t && t.classList && t.classList.contains('os-host')) {
+            scheduleFixes();
+            return;
+          }
+        }
+      }
+    });
+    $(function () {
+      $('.main-sidebar .sidebar').each(function () {
+        observer.observe(this, { attributes: true, attributeFilter: ['class'] });
+      });
+    });
+  }
 })(window.jQuery);
