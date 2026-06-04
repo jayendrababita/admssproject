@@ -15265,20 +15265,88 @@ def fundactivereport(request):
                 #ffromdate = datetime.strptime('20191003','%Y%m%d')
                 #ftodate = ll.rundate
                 
-                activefund = Fundmaster.objects.filter(locationcode=loginlocationcode,status='A').order_by('personname','date')
-                summactivefund = Fundmaster.objects.filter(locationcode=loginlocationcode,status='A').values('locationcode').annotate(totamt=Coalesce(Sum('amount'),0))            
-                context={'loginlocationcode':loginlocationcode,
-                        'loginlocationname':loginlocationname,
-                        'loginrundate':loginrundate,
-                        'loginstatus':loginstatus,
-                        'currdate':currdate,
-                        'activefund':activefund,
-                        'summactivefund':summactivefund,
-                            }
+                #activefund = Fundmaster.objects.filter(locationcode=loginlocationcode,status='A', drcr='C').order_by('personname','date')
+                #summactivefund = Fundmaster.objects.filter(locationcode=loginlocationcode,status='A', drcr='C').values('locationcode').annotate(totamt=Coalesce(Sum('amount'),0))           
+                #activefund = Fundmaster.objects.filter(locationcode=loginlocationcode,status='A',drcr='C').order_by('misamount', 'personname', 'date')
+                #subtotal = Fundmaster.objects.filter(locationcode=loginlocationcode,status='A', drcr='C').values('misamount').annotate(totamt=Coalesce(Sum('amount'), 0)).order_by('misamount')
+                #grandtotal = Fundmaster.objects.filter(locationcode=loginlocationcode,status='A',drcr='C').aggregate(totamt=Coalesce(Sum('amount'), 0))
+
+                
+                 
+                #context={'loginlocationcode':loginlocationcode,
+                #        'loginlocationname':loginlocationname,
+                #        'loginrundate':loginrundate,
+                #        'loginstatus':loginstatus,
+                #        'currdate':currdate,
+                #        'activefund':activefund,
+                #        'subtotal':subtotal,
+                #        'grandtotal':grandtotal,
+                #        }
+                #return render(request, 'admssapp/fundactivereport.html', context)
+
+
+                activefund_qs = Fundmaster.objects.filter(locationcode=loginlocationcode,status='A',drcr='C').order_by('personname', 'date')
+
+                activefund = []
+                prev_person = None
+                subtotal_amt = 0
+                subtotal_misamt = 0
+                sn = 1
+
+                for row in activefund_qs:
+
+                    if prev_person is not None and prev_person != row.personname:
+                        activefund.append({
+                            'is_subtotal': True,
+                            'personname': prev_person,
+                            'subtotal': subtotal_amt,
+                            'subtotal_misamt': subtotal_misamt,
+                        })
+                        subtotal_amt = 0
+                        subtotal_misamt = 0
+
+                    activefund.append({
+                        'is_subtotal': False,
+                        'sn': sn,
+                        'personname': row.personname,
+                        'date': row.date,
+                        'transid': row.transid,
+                        'transnm': row.transnm,
+                        'relatedpersonname': row.relatedpersonname,
+                        'amount': row.amount,
+                        'misamount':row.misamount,
+                        'mis': row.mis,
+                        'drcr': row.drcr,
+                    })
+
+                    subtotal_amt += row.amount or 0
+                    subtotal_misamt += row.misamount or 0
+
+                    prev_person = row.personname
+                    sn += 1
+
+                # this must be outside for loop
+                if prev_person is not None:
+                    activefund.append({
+                        'is_subtotal': True,
+                        'personname': prev_person,
+                        'subtotal': subtotal_amt,
+                        'subtotal_misamt': subtotal_misamt,
+                    })
+
+                grandtotal = Fundmaster.objects.filter(locationcode=loginlocationcode,status='A',drcr='C').aggregate(totamt=Coalesce(Sum('amount'), 0),totmisamt=Coalesce(Sum('misamount'), 0))
+                context = {
+                    'loginlocationcode': loginlocationcode,
+                    'loginlocationname': loginlocationname,
+                    'loginrundate': loginrundate,
+                    'loginstatus': loginstatus,
+                    'currdate': currdate,
+                    'activefund': activefund,
+                    'grandtotal_amt': grandtotal['totamt'],
+                    'grandtotal_misamt': grandtotal['totmisamt'],
+                }
+
                 return render(request, 'admssapp/fundactivereport.html', context)
-
-
-
 
 ###########################
 #### MIS ACTIVE REPORT ####

@@ -132,48 +132,63 @@
     
            
                     <br>
+
+
+
+                    
                     <div class="table-responsive-sm">
                       <table style="width:700px">
                         <tr>
                           <th>Sn</th>
                           <th>Name</th>
                           <th>Date</th>
+                          <th>TransID</th>
                           <th>Fund Type</th>
-                          <th>Related Name
-                          <th>Amount</th>
-                          <th>MIS</th>
-                          <th>Tag</th>
+                          <th>Related Name</th>
+                          <th>Inv.Amt.</th>
+                          <th>Bal.Amt.</th>
+                          <th>MIS(Y/N)</th>
                         </tr>
-    
+                    
                         {% for a in activefund %}
-                        <tr>
-                          <td>{{ forloop.counter }}</td>
-                          <td>{{ a.personname }}</td>
-                          <td>{{ a.date|date:'d-m-Y' }}</td>
-                          <td>{{ a.transnm }}</td>
-                          <td>{{ a.relatedpersonname }}</td>
-                          <td>{{ a.amount }}</td>
-                          <td>{{ a.mis }}</td>
-                          <td>{{ a.drcr }}</td>
-                        </tr>
+                    
+                          {% if a.is_subtotal %}
+                          <tr style="background:#ffffcc;font-weight:bold;">
+                            <td colspan="6">
+                              Sub Total - {{ a.personname }}
+                            </td>
+                            <td>{{ a.subtotal }}</td>
+                            <td>{{ a.subtotal_misamt }}</td>
+            
+                            <td colspan="2"></td>
+                          </tr>
+                    
+                          {% else %}
+                          <tr>
+                            <td>{{ a.sn }}</td>
+                            <td>{{ a.personname }}</td>
+                            <td>{{ a.date|date:'d-m-Y' }}</td>
+                            <td>{{ a.transid }}</td>
+                            <td>{{ a.transnm }}</td>
+                            <td>{{ a.relatedpersonname }}</td>
+                            <td>{{ a.amount }}</td>
+                            <td>{{ a.misamount }}</td>
+                            <td>{{ a.mis|default:'N' }}</td>
+
+                          </tr>
+                          {% endif %}
+                    
                         {% endfor %}
-
-                        {% for a in summactivefund %} 
-                        <tr>
-                          <th></th>
-                          <th></th>
-                          <th>Total Fund Active</th>
-                          <th></th>
-                          <th></th>
-                          <th>{{ a.totamt }}</th>
-
+                    
+                        <tr style="background:#d9edf7;font-weight:bold;">
+                          <td colspan="6">GRAND TOTAL</td>
+                          <td>{{ grandtotal_amt }}</td>
+                          <td>{{ grandtotal_misamt }}</td>
+                          <td colspan="2"></td>
                         </tr>
-                        {% endfor %}
-
+                    
                       </table>
-
                     </div>
-    
     
                   </div>
                 </div>

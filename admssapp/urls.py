@@ -155,7 +155,7 @@ urlpatterns = [
     path('fundactivereport/', views.fundactivereport, name="fundactivereport"),
     path('fundmisactivereport/', views.fundmisactivereport, name="fundmisactivereport"),
         
-    path('fundtransactionreport/', views.fundtransactionreport, name="fundtransactionreport"),
+    #path('fundtransactionreport/', views.fundtransactionreport, name="fundtransactionreport"),
     path('emifundtransactionreport/', views.emifundtransactionreport,name="emifundtransactionreport"),
     path('emifundtransactionledger/<str:fundid>',views.emifundtransactionledger, name="emifundtransactionledger"),
 
