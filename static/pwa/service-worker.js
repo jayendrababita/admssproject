@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'admss-v3';
+const CACHE_VERSION = 'admss-v4';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 
 const PRECACHE_ASSETS = [
@@ -56,6 +56,23 @@ self.addEventListener('fetch', (event) => {
   }
 
   if (url.pathname.startsWith('/static/')) {
+    const isMobileFixAsset = url.pathname.includes('admss-mobile-sidebar');
+
+    if (isMobileFixAsset) {
+      event.respondWith(
+        fetch(request)
+          .then((response) => {
+            if (response && response.status === 200) {
+              const copy = response.clone();
+              caches.open(STATIC_CACHE).then((cache) => cache.put(request, copy));
+            }
+            return response;
+          })
+          .catch(() => caches.match(request))
+      );
+      return;
+    }
+
     event.respondWith(
       caches.match(request).then(
         (cached) =>

@@ -89,30 +89,53 @@ html {
     margin-left: -250px !important;
   }
 
-  /* AdminLTE keeps a fixed 4.6rem brand strip when collapsed — hide it on mobile */
-  .sidebar-collapse.layout-navbar-fixed .wrapper .brand-link,
-  .sidebar-collapse.layout-navbar-fixed .wrapper.sidebar-collapse .brand-link {
+  /*
+   * AdminLTE keeps a fixed 4.6rem brand strip when collapsed (position:fixed).
+   * Must beat .layout-navbar-fixed.sidebar-mini.sidebar-collapse .wrapper .brand-link
+   */
+  body.sidebar-mini.sidebar-collapse.layout-navbar-fixed.layout-fixed .wrapper .brand-link,
+  body.sidebar-mini.sidebar-collapse.layout-navbar-fixed .wrapper .brand-link,
+  body.sidebar-collapse.layout-navbar-fixed .wrapper .brand-link {
     display: none !important;
+    visibility: hidden !important;
     width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
     overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    left: -9999px !important;
   }
 
-  .sidebar-open.layout-navbar-fixed .wrapper .brand-link {
+  body.sidebar-open.layout-navbar-fixed .wrapper .brand-link {
     display: flex !important;
+    visibility: visible !important;
     width: 250px !important;
+    min-width: 250px !important;
+    max-width: 250px !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    left: 0 !important;
   }
 
   /* sidebar-mini desktop offsets must not apply on mobile */
-  .sidebar-mini.sidebar-collapse .content-wrapper,
-  .sidebar-mini.sidebar-collapse .main-footer,
-  .sidebar-mini.sidebar-collapse .main-header {
+  body.sidebar-mini.sidebar-collapse .content-wrapper,
+  body.sidebar-mini.sidebar-collapse .main-footer,
+  body.sidebar-mini.sidebar-collapse .main-header {
     margin-left: 0 !important;
+    padding-left: max(0.75rem, env(safe-area-inset-left)) !important;
   }
 
-  .sidebar-mini.sidebar-collapse .main-sidebar,
-  .sidebar-mini.sidebar-collapse .main-sidebar::before {
+  body.sidebar-mini.sidebar-collapse .main-sidebar,
+  body.sidebar-mini.sidebar-collapse .main-sidebar::before {
     margin-left: -250px !important;
     width: 250px !important;
+    transform: translateX(0) !important;
+  }
+
+  body.sidebar-open.sidebar-mini .main-sidebar,
+  body.sidebar-open.sidebar-mini .main-sidebar::before {
+    margin-left: 0 !important;
   }
 
   .main-footer {
