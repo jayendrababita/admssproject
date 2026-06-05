@@ -5,18 +5,19 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="">
+      <li class="nav-item">
            {% if loginrundate == currdate %}
            <a style="padding-left:0px;" class="nav-link"><strong>ADMSS INSURANCE HQ</strong></a>
            {% else %}
            <a style="padding-left:0px; color:rgb(214, 16, 16);" class="nav-link"><strong>ADMSS INSURANCE HQ - {{loginrundate}} </strong></a>
            {% endif %}
-          <a class="nav-link" style="margin-top:-40px;margin-left:175px; color:red">
-          <marquee behavior="scroll" direction="left">{{scrolltext}} 
-            <span style="margin-top:-40px;margin-left:175px; color:DodgerBlue">{{scrollbirthday}}</span>
-            <span style="margin-top:-40px;margin-left:175px; color:orange">{{scrollanniversary}}</span>
-            <span style="margin-top:-40px;margin-left:175px; color:blue">{{scrollpendingfi}}</span>
-
+      </li>
+      <li class="nav-item admss-navbar-marquee d-none d-md-flex">
+          <a class="nav-link" style="color:red">
+          <marquee behavior="scroll" direction="left">{{scrolltext}}
+            <span style="color:DodgerBlue">{{scrollbirthday}}</span>
+            <span style="color:orange">{{scrollanniversary}}</span>
+            <span style="color:blue">{{scrollpendingfi}}</span>
           </marquee>
            </a>
       </li>

@@ -89,6 +89,50 @@ html {
     margin-left: -250px !important;
   }
 
+  /* AdminLTE keeps a fixed 4.6rem brand strip when collapsed — hide it on mobile */
+  .sidebar-collapse.layout-navbar-fixed .wrapper .brand-link,
+  .sidebar-collapse.layout-navbar-fixed .wrapper.sidebar-collapse .brand-link {
+    display: none !important;
+    width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .sidebar-open.layout-navbar-fixed .wrapper .brand-link {
+    display: flex !important;
+    width: 250px !important;
+  }
+
+  /* sidebar-mini desktop offsets must not apply on mobile */
+  .sidebar-mini.sidebar-collapse .content-wrapper,
+  .sidebar-mini.sidebar-collapse .main-footer,
+  .sidebar-mini.sidebar-collapse .main-header {
+    margin-left: 0 !important;
+  }
+
+  .sidebar-mini.sidebar-collapse .main-sidebar,
+  .sidebar-mini.sidebar-collapse .main-sidebar::before {
+    margin-left: -250px !important;
+    width: 250px !important;
+  }
+
+  .main-footer {
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+  }
+
+  /* Navbar marquee: avoid hard-coded left offset that clips content */
+  .admss-navbar-marquee {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .admss-navbar-marquee .nav-link {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+
   @media (max-width: 576px) {
     body.sidebar-open {
       position: relative;
