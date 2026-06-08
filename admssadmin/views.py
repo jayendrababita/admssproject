@@ -3382,10 +3382,24 @@ def admssadminemicollectorreportget(request):
 
                             emicoll = Loanmaster.objects.filter(locationcode=loginlocationcode,status='A').values('rpersoncode','rpersonname').distinct().order_by('rpersonname')
 
-                            #allrecord = Daybook.objects.values('personcode','personname').filter(date__range=(ffromdate,ftodate),locationcode=flocation,transcd__in=['3011','3012','3013','3019']).annotate(totemi=Sum('amount',filter=Q(transcd__in=['3011','3012','3013','3019']))).annotate(totprin=Sum('amount',filter=Q(transcd__in=['3011','3019']))).annotate(totint=Sum('amount',filter=Q(transcd__in=['3012','3013']))).annotate(indiamt=Sum('amount',filter=Q(transcd__in=['3012','3013']) & Q(loanid__startswith='I'))).annotate(groupamt=Sum('amount',filter=Q(transcd__in=['3012','3013']) & Q(loanid__startswith='G'))).order_by('-totemi')
-                            allrecord = Daybook.objects.values('personcode','personname').filter(date__range=(ffromdate,ftodate),locationcode=flocation,transcd__in=['3011','3012','3013','3019']).annotate(totemi=Sum('amount',filter=Q(transcd__in=['3011','3012','3013','3019']))).annotate(totprin=Sum('amount',filter=Q(transcd__in=['3011','3019']))).annotate(totint=Sum('amount',filter=Q(transcd__in=['3012','3013']))).annotate(indiamt=Sum('amount',filter=Q(transcd__in=['3012','3013']) & Q(loanid__startswith='I'))).annotate(groupamt=Sum('amount',filter=Q(transcd__in=['3012','3013']) & Q(loanid__startswith='G'))).annotate(devexp=Coalesce(Sum('amount',filter=Q(transcd__in=['3012','3013']) & Q(loanid__startswith='I'))*.1,0) + Coalesce(Sum('amount',filter=Q(transcd__in=['3012','3013']) & Q(loanid__startswith='G'))*.1*.5,0)).order_by('-totemi')
+                            devexp_expr = ExpressionWrapper(
+                                Coalesce(
+                                    Sum('amount', filter=Q(transcd__in=['3012', '3013']) & Q(loanid__startswith='I')) * 0.1,
+                                    0.0,
+                                    output_field=FloatField(),
+                                )
+                                + Coalesce(
+                                    Sum('amount', filter=Q(transcd__in=['3012', '3013']) & Q(loanid__startswith='G')) * 0.1 * 0.5,
+                                    0.0,
+                                    output_field=FloatField(),
+                                ),
+                                output_field=FloatField(),
+                            )
 
-                            summ = Daybook.objects.values('locationcode','locationname').filter(date__range=(ffromdate,ftodate),locationcode=flocation,transcd__in=['3011','3012','3013','3019']).annotate(totemi=Sum('amount',filter=Q(transcd__in=['3011','3012','3013','3019']))).annotate(totprin=Sum('amount',filter=Q(transcd__in=['3011','3019']))).annotate(totint=Sum('amount',filter=Q(transcd__in=['3012','3013']))).annotate(indiamt=Sum('amount',filter=Q(transcd__in=['3012','3013']) & Q(loanid__startswith='I'))).annotate(groupamt=Sum('amount',filter=Q(transcd__in=['3012','3013']) & Q(loanid__startswith='G'))).annotate(devexp=Coalesce(Sum('amount',filter=Q(transcd__in=['3012','3013']) & Q(loanid__startswith='I'))*.1,0) + Coalesce(Sum('amount',filter=Q(transcd__in=['3012','3013']) & Q(loanid__startswith='G'))*.1*.5,0))
+                            #allrecord = Daybook.objects.values('personcode','personname').filter(date__range=(ffromdate,ftodate),locationcode=flocation,transcd__in=['3011','3012','3013','3019']).annotate(totemi=Sum('amount',filter=Q(transcd__in=['3011','3012','3013','3019']))).annotate(totprin=Sum('amount',filter=Q(transcd__in=['3011','3019']))).annotate(totint=Sum('amount',filter=Q(transcd__in=['3012','3013']))).annotate(indiamt=Sum('amount',filter=Q(transcd__in=['3012','3013']) & Q(loanid__startswith='I'))).annotate(groupamt=Sum('amount',filter=Q(transcd__in=['3012','3013']) & Q(loanid__startswith='G'))).order_by('-totemi')
+                            allrecord = Daybook.objects.values('personcode','personname').filter(date__range=(ffromdate,ftodate),locationcode=flocation,transcd__in=['3011','3012','3013','3019']).annotate(totemi=Sum('amount',filter=Q(transcd__in=['3011','3012','3013','3019']))).annotate(totprin=Sum('amount',filter=Q(transcd__in=['3011','3019']))).annotate(totint=Sum('amount',filter=Q(transcd__in=['3012','3013']))).annotate(indiamt=Sum('amount',filter=Q(transcd__in=['3012','3013']) & Q(loanid__startswith='I'))).annotate(groupamt=Sum('amount',filter=Q(transcd__in=['3012','3013']) & Q(loanid__startswith='G'))).annotate(devexp=devexp_expr).order_by('-totemi')
+
+                            summ = Daybook.objects.values('locationcode','locationname').filter(date__range=(ffromdate,ftodate),locationcode=flocation,transcd__in=['3011','3012','3013','3019']).annotate(totemi=Sum('amount',filter=Q(transcd__in=['3011','3012','3013','3019']))).annotate(totprin=Sum('amount',filter=Q(transcd__in=['3011','3019']))).annotate(totint=Sum('amount',filter=Q(transcd__in=['3012','3013']))).annotate(indiamt=Sum('amount',filter=Q(transcd__in=['3012','3013']) & Q(loanid__startswith='I'))).annotate(groupamt=Sum('amount',filter=Q(transcd__in=['3012','3013']) & Q(loanid__startswith='G'))).annotate(devexp=devexp_expr)
                             
 
 
