@@ -15,7 +15,7 @@ from admssapp.models import Rate
 from admssapp.models import Gstdata
 from admssapp.models import Crifdata
 from admssapp.models import Licdata
-from admssapp.models import Auditloanmaster20202021, Auditloanrecov20192020, Auditloanmaster20212022, Auditloanmaster20222023, Auditloanmaster20232024, Auditloanmaster20242025
+from admssapp.models import Auditloanmaster20202021, Auditloanrecov20192020, Auditloanmaster20212022, Auditloanmaster20222023, Auditloanmaster20232024, Auditloanmaster20242025,Auditloanmaster20252026 
 from admssapp.models import Daydrcr
 from admssapp.models import Authcenterexpance
 
@@ -1792,7 +1792,7 @@ def admssadminauditmasterdata(request):
                     #    x.save()
 
 
-                    Auditloanmaster20242025.objects.all().delete()
+                    Auditloanmaster20252026.objects.all().delete()
 
                     db = Daybook.objects.filter(date__range=(ffromdate,ftodate),transcd__in=['3010','3011','3012','3019']).distinct('loanid')
 
@@ -1991,17 +1991,43 @@ def admssadminauditmasterdata(request):
                                 i20242025 = Daybook.objects.filter(date__range=(ffromtmp, ftotmp), transcd__in=["3012"], loanid=floanid).aggregate(totalac=Coalesce(Count('transid'), 0), totamt=Coalesce(Sum('amount'), 0))
 
                                 ####################################################
-                                fappprinrecamt20242025 = p20242025.get("totamt")*1.011846
-                                #.86485
+                                fappprinrecamt20242025 = p20242025.get("totamt")
+                                #*1.011846
+                            
                                 ####################################################
-                                fappintrecamt20242025 = i20242025.get("totamt")*.711075
-                                #.80248599
+                                fappintrecamt20242025 = i20242025.get("totamt")
+                                #.711075
 
                                 pbank20242025 = Daybook.objects.filter(date__range=(ffromtmp, ftotmp), transcd__in=["3011"], mode__icontains='BANK', loanid=floanid).aggregate(totalac=Coalesce(Count('transid'), 0), totamt=Coalesce(Sum('amount'), 0))
                                 ibank20242025 = Daybook.objects.filter(date__range=(ffromtmp, ftotmp), transcd__in=["3012"], mode__icontains='BANK', loanid=floanid).aggregate(totalac=Coalesce(Count('transid'), 0), totamt=Coalesce(Sum('amount'), 0))
 
                                 fappprinrecamt20242025bank = pbank20242025.get("totamt")
                                 fappintrecamt20242025bank = ibank20242025.get("totamt")
+
+
+                                ######### 2025 - 2026 ##########
+
+                                ffromtmp = '01/04/2025'
+                                ftotmp = '31/03/2026'
+
+                                ffromtmp = datetime.strptime('01/04/2025', '%d/%m/%Y')
+                                ftotmp = datetime.strptime('31/03/2026', '%d/%m/%Y')
+
+                                p20252026 = Daybook.objects.filter(date__range=(ffromtmp, ftotmp), transcd__in=["3011"], loanid=floanid).aggregate(totalac=Coalesce(Count('transid'), 0), totamt=Coalesce(Sum('amount'), 0))
+                                i20252026 = Daybook.objects.filter(date__range=(ffromtmp, ftotmp), transcd__in=["3012"], loanid=floanid).aggregate(totalac=Coalesce(Count('transid'), 0), totamt=Coalesce(Sum('amount'), 0))
+
+                                ####################################################
+                                fappprinrecamt20252026 = p20252026.get("totamt")*0.9200011
+                                #.86485
+                                ####################################################
+                                fappintrecamt20252026 = i20252026.get("totamt")*1.201075
+                                #.80248599
+
+                                pbank20252026 = Daybook.objects.filter(date__range=(ffromtmp, ftotmp), transcd__in=["3011"], mode__icontains='BANK', loanid=floanid).aggregate(totalac=Coalesce(Count('transid'), 0), totamt=Coalesce(Sum('amount'), 0))
+                                ibank20252026 = Daybook.objects.filter(date__range=(ffromtmp, ftotmp), transcd__in=["3012"], mode__icontains='BANK', loanid=floanid).aggregate(totalac=Coalesce(Count('transid'), 0), totamt=Coalesce(Sum('amount'), 0))
+
+                                fappprinrecamt20252026bank = pbank20252026.get("totamt")
+                                fappintrecamt20252026bank = ibank20252026.get("totamt")
 
 
 
@@ -2066,7 +2092,7 @@ def admssadminauditmasterdata(request):
                                 fapptotalrecamt20222023 = 0
                                 fapptotalrecamt20232024 = 0
                                 fapptotalrecamt20242025 = 0
-
+                                fapptotalrecamt20252026 = 0
 
                                 fapptotalrecamt20192020 = int(fappprinrecamt20192020) + int(fappintrecamt20192020)
                                 fapptotalrecamt20202021 = int(fappprinrecamt20202021) + int(fappintrecamt20202021)
@@ -2074,6 +2100,7 @@ def admssadminauditmasterdata(request):
                                 fapptotalrecamt20222023 = int(fappprinrecamt20222023) + int(fappintrecamt20222023)
                                 fapptotalrecamt20232024 = int(fappprinrecamt20232024) + int(fappintrecamt20232024)
                                 fapptotalrecamt20242025 = int(fappprinrecamt20242025) + int(fappintrecamt20242025)
+                                fapptotalrecamt20252026 = int(fappprinrecamt20252026) + int(fappintrecamt20252026)
 
 
                                 fappdueamt20192020 = 0
@@ -2082,6 +2109,9 @@ def admssadminauditmasterdata(request):
                                 fappdueamt20222023 = 0
                                 fappdueamt20232024 = 0
                                 fappdueamt20242025 = 0
+                                fappdueamt20252026 = 0
+
+
 
                                 fappdueamt20192020 = fapptotalrecamt20192020
                                 fappdueamt20202021 = fapptotalrecamt20202021
@@ -2089,35 +2119,129 @@ def admssadminauditmasterdata(request):
                                 fappdueamt20222023 = fapptotalrecamt20222023
                                 fappdueamt20232024 = fapptotalrecamt20232024
                                 fappdueamt20242025 = fapptotalrecamt20242025
+                                fappdueamt20252026 = fapptotalrecamt20252026
 
 
-                                fappprinrecamt = fappprinrecamt20192020 + fappprinrecamt20202021 + fappprinrecamt20212022 + fappprinrecamt20222023 + fappprinrecamt20232024 + fappprinrecamt20242025 
-                                fappintrecamt = fappintrecamt20192020 + fappintrecamt20202021 + fappintrecamt20212022 + fappintrecamt20222023 + fappintrecamt20232024 + fappintrecamt20242025
+                                if fappprinrecamt20192020 > 0:
+                                     fappprinrecamt20192020 = fappprinrecamt20192020 * .5
+
+                                if fappintrecamt20192020 > 0:
+                                     fappintrecamt20192020 = fappintrecamt20192020 * 1
+                                     
+                                if fappprinrecamt20202021 > 0:
+                                     fappprinrecamt20202021 = fappprinrecamt20202021 * .5
+
+                                if fappintrecamt20202021 > 0:
+                                     fappintrecamt20202021 = fappintrecamt20202021 * 1
+
+                                if fappprinrecamt20212022 > 0:
+                                     fappprinrecamt20212022 = fappprinrecamt20212022 * .5
+
+                                if fappintrecamt20212022 > 0:
+                                     fappintrecamt20212022 = fappintrecamt20212022 * 1
+
+                                if fappprinrecamt20222023 > 0:
+                                     fappprinrecamt20222023 = fappprinrecamt20222023 * .5
+
+                                if fappintrecamt20222023 > 0:
+                                     fappintrecamt20222023 = fappintrecamt20222023 * 1
+
+                                if fappprinrecamt20232024 > 0:
+                                     fappprinrecamt20232024 = fappprinrecamt20232024 * .5
+
+                                if fappintrecamt20232024 > 0:
+                                     fappintrecamt20232024 = fappprinrecamt20232024 * 1
+
+                                if fappprinrecamt20242025 > 0:
+                                     fappprinrecamt20242025  = fappprinrecamt20242025 * .5
+
+                                if fappintrecamt20242025 > 0:
+                                     fappintrecamt20242025 = fappintrecamt20242025 * 1
+
+
+
+
+                                if fappprinrecamt20192020 <= 0:
+                                     fappprinrecamt20192020 = 0
+
+                                if fappintrecamt20192020 <= 0:
+                                     fappintrecamt20192020 = 0
+                                     
+                                if fappprinrecamt20202021 <= 0:
+                                     fappprinrecamt20202021 = 0
+
+                                if fappintrecamt20202021 <= 0:
+                                     fappintrecamt20202021 = 0
+
+                                if fappprinrecamt20212022 <= 0:
+                                     fappprinrecamt20212022 = 0
+
+                                if fappintrecamt20212022 <= 0:
+                                     fappintrecamt20212022 = 0
+
+                                if fappprinrecamt20222023 <= 0:
+                                     fappprinrecamt20222023 = 0
+
+                                if fappintrecamt20222023 <= 0:
+                                     fappintrecamt20222023 = 0
+
+                                if fappprinrecamt20232024 <= 0:
+                                     fappprinrecamt20232024 = 0
+
+                                if fappintrecamt20232024 <= 0:
+                                     fappintrecamt20232024 = 0
+
+                                if fappprinrecamt20242025 <= 0:
+                                     fappprinrecamt20242025 = 0
+
+                                if fappintrecamt20242025 <= 0:
+                                     fappintrecamt20242025 = 0
+
+
+                                fapptotalrecamt20192020 = fappprinrecamt20192020 + fappintrecamt20192020
+                                fapptotalrecamt20202021 = fappprinrecamt20202021 + fappintrecamt20202021
+                                fapptotalrecamt20212022 = fappprinrecamt20212022 + fappintrecamt20212022
+                                fapptotalrecamt20222023 = fappprinrecamt20222023 + fappintrecamt20222023
+                                fapptotalrecamt20232024 = fappprinrecamt20232024 + fappintrecamt20232024
+                                fapptotalrecamt20242025 = fappprinrecamt20242025 + fappintrecamt20242025
+                                fapptotalrecamt20252026 = fappprinrecamt20252026 + fappintrecamt20252026
+
+
+
+                                fappprinrecamt = fappprinrecamt20192020 + fappprinrecamt20202021 + fappprinrecamt20212022 + fappprinrecamt20222023 + fappprinrecamt20232024 + fappprinrecamt20242025 + fappprinrecamt20252026 
+                                fappintrecamt = fappintrecamt20192020 + fappintrecamt20202021 + fappintrecamt20212022 + fappintrecamt20222023 + fappintrecamt20232024 + fappintrecamt20242025 + fappintrecamt20252026
                                 fapptotalrecamt = fappprinrecamt + fappintrecamt
 
 
-                                if fstatus == 'C': 
+                                # if fstatus == 'C': 
 
-                                    fappprinrecamt20212022 = fapploanamt - fappprinrecamt20192020 - fappprinrecamt20202021 - fappprinrecamt20222023 - fappprinrecamt20232024
-                                    fappintrecamt20212022 = fappintrecamt - fappintrecamt20192020 - fappintrecamt20202021 - fappintrecamt20212022 - fappintrecamt20222023 - fappintrecamt20232024
+                                #     fappprinrecamt20212022 = fapploanamt - fappprinrecamt20192020 - fappprinrecamt20202021 - fappprinrecamt20222023 - fappprinrecamt20232024 - fappprinrecamt20242025 - fappprinrecamt20252026
+                                #     fappintrecamt20212022 = fappintrecamt - fappintrecamt20192020 - fappintrecamt20202021 - fappintrecamt20212022 - fappintrecamt20222023 - fappintrecamt20232024 - fappintrecamt20242025 - fappintrecamt20252026
                            
-                                    fappprinrecamt = fappprinrecamt20192020 + fappprinrecamt20202021 + fappprinrecamt20212022 + fappprinrecamt20222023 + fappprinrecamt20232024
-                                    fappintrecamt = fappintrecamt20192020 + fappintrecamt20202021 + fappintrecamt20212022 + fappintrecamt20222023 + fappintrecamt20232024
-                                    fapptotalrecamt = fappprinrecamt + fappintrecamt
+                                #     fappprinrecamt = fappprinrecamt20192020 + fappprinrecamt20202021 + fappprinrecamt20212022 + fappprinrecamt20222023 + fappprinrecamt20232024 + fappprinrecamt20242025 + fappprinrecamt20252026 
+                                #     fappintrecamt = fappintrecamt20192020 + fappintrecamt20202021 + fappintrecamt20212022 + fappintrecamt20222023 + fappintrecamt20232024 + fappintrecamt20242025 + fappintrecamt20252026
+                                #     fapptotalrecamt = fappprinrecamt + fappintrecamt
 
 
-                                    fapploandueamt = fapptotalrecamt
-                                    fapploanamt = fappprinrecamt
-                                    fapploanint = fappintrecamt
+                                #     fapploandueamt = fapptotalrecamt
+                                #     fapploanamt = fappprinrecamt
+                                #     fapploanint = fappintrecamt
 
 
-                                #1.01714
-                                #1.05
 
-                                #1.11217680
-                                fapptotalbalamt = (fapploandueamt) * 1.104625 - fapptotalrecamt
-                                fappintbalamt = fapploanint - fappintrecamt
-                                fappprinbalamt = fapptotalbalamt - fappintbalamt
+
+                                #fappprinbalamt = fapploanamt - fappprinrecamt
+                                fappprinbalamt = fapploanamt - (fappprinrecamt20192020 + fappprinrecamt20202021 + fappprinrecamt20212022 + fappprinrecamt20222023 + fappprinrecamt20232024 + fappprinrecamt20242025 + int(fappprinrecamt20252026*.7)) 
+
+                                fappintbalamt = (fapploanint - fappintrecamt)*1.1
+                                
+                                if fappintbalamt*.5 > fappprinbalamt:
+                                     fappintbalamt = fappintbalamt *.8
+                                     
+                                fapptotalbalamt = fappprinbalamt + fappintbalamt
+
+
+
 
                                 if fappintbalamt < 0:
                                     fappintbalamt = 0
@@ -2125,17 +2249,11 @@ def admssadminauditmasterdata(request):
                                     fappprinbalamt = 0
 
 
-                                fapptotalbalamt = fappprinbalamt + fappintbalamt
-
-
-                                #fappprinbalamt = fapploanamt - fappprinrecamt
-                                #fappintbalamt = fapploanint - fappintrecamt
-                                #fapptotalbalamt = fappprinbalamt + fappintbalamt
 
 
             
 
-                                audit = Auditloanmaster20242025(locationcode=flocationcode,
+                                audit = Auditloanmaster20252026(locationcode=flocationcode,
                                                                     locationname=flocationname,
                                                                     appname=fappname,
                                                                     loanid=floanid,
@@ -2166,12 +2284,16 @@ def admssadminauditmasterdata(request):
                                                                     appprinrecamt20242025=fappprinrecamt20242025,
                                                                     appintrecamt20242025=fappintrecamt20242025,
                                                                     apptotalrecamt20242025=fapptotalrecamt20242025,
+                                                                    appprinrecamt20252026=fappprinrecamt20252026,
+                                                                    appintrecamt20252026=fappintrecamt20252026,
+                                                                    apptotalrecamt20252026=fapptotalrecamt20252026,
                                                                     appdueamt20192020=fappdueamt20192020,
                                                                     appdueamt20202021=fappdueamt20202021,
                                                                     appdueamt20212022=fappdueamt20212022,
                                                                     appdueamt20222023=fappdueamt20222023,
                                                                     appdueamt20232024=fappdueamt20232024,
                                                                     appdueamt20242025=fappdueamt20242025,
+                                                                    appdueamt20252026=fappdueamt20252026,                                                                    
                                                                     appprinrecamt=fappprinrecamt,
                                                                     appintrecamt=fappintrecamt,
                                                                     apptotalrecamt=fapptotalrecamt,
@@ -2184,15 +2306,15 @@ def admssadminauditmasterdata(request):
 
 
 
-                    auditdata = Auditloanmaster20242025.objects.all().order_by('id').only('loanid','appname','apppresentadd','apppresentaddcity','appoccupation','appprindueamt','appintdueamt','apptotaldueamt','appprinrecamt20192020','appintrecamt20192020','apptotalrecamt20192020','appprinrecamt20202021','appintrecamt20202021','apptotalrecamt20202021','appprinrecamt20212022','appintrecamt20212022','apptotalrecamt20212022','appprinrecamt20222023','appintrecamt20222023','apptotalrecamt20222023','appprinrecamt20232024','appintrecamt20232024','apptotalrecamt20232024','appprinrecamt20242025','appintrecamt20242025','apptotalrecamt20242025','appprinrecamt','appintrecamt','apptotalbalamt','appprinbalamt','appintbalamt','apptotalbalamt','apploandate')
+                    auditdata = Auditloanmaster20252026.objects.all().order_by('id').only('loanid','appname','apppresentadd','apppresentaddcity','appoccupation','appprindueamt','appintdueamt','apptotaldueamt','appprinrecamt20192020','appintrecamt20192020','apptotalrecamt20192020','appprinrecamt20202021','appintrecamt20202021','apptotalrecamt20202021','appprinrecamt20212022','appintrecamt20212022','apptotalrecamt20212022','appprinrecamt20222023','appintrecamt20222023','apptotalrecamt20222023','appprinrecamt20232024','appintrecamt20232024','apptotalrecamt20232024','appprinrecamt20242025','appintrecamt20242025','apptotalrecamt20242025','appprinrecamt20252026','appintrecamt20252026','apptotalrecamt20252026','appprinrecamt','appintrecamt','apptotalbalamt','appprinbalamt','appintbalamt','apptotalbalamt','apploandate','status')
 
                     response = HttpResponse(content_type='text/csv')
                     response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format('auditdata')
                     writer = csv.writer(response)
-                    writer.writerow(['loanid','appname','apppresentadd','apppresentaddcity','appoccupation','appprindueamt','appintdueamt','apptotaldueamt','appprinrecamt20192020','appintrecamt20192020','apptotalrecamt20192020','appprinrecamt20202021','appintrecamt20202021','apptotalrecamt20202021','appprinrecamt20212022','appintrecamt20212022','apptotalrecamt20212022','appprinrecamt20222023','appintrecamt20222023','apptotalrecamt20222023','appprinrecamt20232024','appintrecamt20232024','apptotalrecamt20232024','appprinrecamt20242025','appintrecamt20242025','apptotalrecamt20242025','appprinrecamt','appintrecamt','apptotalbalamt','appprinbalamt','appintbalamt','apptotalbalamt','apploandate'])
+                    writer.writerow(['loanid','appname','apppresentadd','apppresentaddcity','appoccupation','appprindueamt','appintdueamt','apptotaldueamt','appprinrecamt20192020','appintrecamt20192020','apptotalrecamt20192020','appprinrecamt20202021','appintrecamt20202021','apptotalrecamt20202021','appprinrecamt20212022','appintrecamt20212022','apptotalrecamt20212022','appprinrecamt20222023','appintrecamt20222023','apptotalrecamt20222023','appprinrecamt20232024','appintrecamt20232024','apptotalrecamt20232024','appprinrecamt20242025','appintrecamt20242025','apptotalrecamt20242025','appprinrecamt20252026','appintrecamt20252026','apptotalrecamt20252026','appprinrecamt','appintrecamt','apptotalbalamt','appprinbalamt','appintbalamt','apptotalbalamt','apploandate','status'])
 
                     for user in auditdata:
-                        writer.writerow([user.loanid,user.appname,user.apppresentadd,user.apppresentaddcity,user.appoccupation,user.appprindueamt,user.appintdueamt,user.apptotaldueamt,user.appprinrecamt20192020,user.appintrecamt20192020,user.apptotalrecamt20192020,user.appprinrecamt20202021,user.appintrecamt20202021,user.apptotalrecamt20202021,user.appprinrecamt20212022,user.appintrecamt20212022,user.apptotalrecamt20212022,user.appprinrecamt20222023,user.appintrecamt20222023,user.apptotalrecamt20222023,user.appprinrecamt20232024,user.appintrecamt20232024,user.apptotalrecamt20232024,user.appprinrecamt20242025,user.appintrecamt20242025,user.apptotalrecamt20242025,user.appprinrecamt,user.appintrecamt,user.apptotalrecamt,user.appprinbalamt,user.appintbalamt,user.apptotalbalamt,user.apploandate])
+                        writer.writerow([user.loanid,user.appname,user.apppresentadd,user.apppresentaddcity,user.appoccupation,user.appprindueamt,user.appintdueamt,user.apptotaldueamt,user.appprinrecamt20192020,user.appintrecamt20192020,user.apptotalrecamt20192020,user.appprinrecamt20202021,user.appintrecamt20202021,user.apptotalrecamt20202021,user.appprinrecamt20212022,user.appintrecamt20212022,user.apptotalrecamt20212022,user.appprinrecamt20222023,user.appintrecamt20222023,user.apptotalrecamt20222023,user.appprinrecamt20232024,user.appintrecamt20232024,user.apptotalrecamt20232024,user.appprinrecamt20242025,user.appintrecamt20242025,user.apptotalrecamt20242025,user.appprinrecamt20252026,user.appintrecamt20252026,user.apptotalrecamt20252026,user.appprinrecamt,user.appintrecamt,user.apptotalrecamt,user.appprinbalamt,user.appintbalamt,user.apptotalbalamt,user.apploandate,user.status])
 
                     message = "AUDIT Loan Master Data Prepared..."
                     messages.success(request, message)
@@ -2202,8 +2324,8 @@ def admssadminauditmasterdata(request):
 
                     return HttpResponseRedirect('/admssadminauditmasterdata/')
 
-                ffromdate = datetime(2024, 4, 1)
-                ftodate = datetime(2025, 3, 31)
+                ffromdate = datetime(2025, 4, 1)
+                ftodate = datetime(2026, 3, 31)
 
                 context = {'loginlocationcode': loginlocationcode,
                            'loginlocationname': loginlocationname,
