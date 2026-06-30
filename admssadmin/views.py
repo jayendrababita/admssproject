@@ -2020,7 +2020,7 @@ def admssadminauditmasterdata(request):
                                 fappprinrecamt20252026 = p20252026.get("totamt")*0.9200011
                                 #.86485
                                 ####################################################
-                                fappintrecamt20252026 = i20252026.get("totamt")*1.201075
+                                fappintrecamt20252026 = i20252026.get("totamt")*1.1969115
                                 #.80248599
 
                                 pbank20252026 = Daybook.objects.filter(date__range=(ffromtmp, ftotmp), transcd__in=["3011"], mode__icontains='BANK', loanid=floanid).aggregate(totalac=Coalesce(Count('transid'), 0), totamt=Coalesce(Sum('amount'), 0))
@@ -2123,77 +2123,74 @@ def admssadminauditmasterdata(request):
 
 
                                 if fappprinrecamt20192020 > 0:
-                                     fappprinrecamt20192020 = fappprinrecamt20192020 * .5
+                                     fappprinrecamt20192020 = fappprinrecamt20192020 * .2
 
                                 if fappintrecamt20192020 > 0:
-                                     fappintrecamt20192020 = fappintrecamt20192020 * 1
+                                     fappintrecamt20192020 = fappintrecamt20192020 * .7
                                      
                                 if fappprinrecamt20202021 > 0:
-                                     fappprinrecamt20202021 = fappprinrecamt20202021 * .5
+                                     fappprinrecamt20202021 = fappprinrecamt20202021 * .2
 
                                 if fappintrecamt20202021 > 0:
-                                     fappintrecamt20202021 = fappintrecamt20202021 * 1
+                                     fappintrecamt20202021 = fappintrecamt20202021 * .7
 
                                 if fappprinrecamt20212022 > 0:
-                                     fappprinrecamt20212022 = fappprinrecamt20212022 * .5
+                                     fappprinrecamt20212022 = fappprinrecamt20212022 * .2
 
                                 if fappintrecamt20212022 > 0:
-                                     fappintrecamt20212022 = fappintrecamt20212022 * 1
+                                     fappintrecamt20212022 = fappintrecamt20212022 * .7
 
                                 if fappprinrecamt20222023 > 0:
-                                     fappprinrecamt20222023 = fappprinrecamt20222023 * .5
+                                     fappprinrecamt20222023 = fappprinrecamt20222023 * .2
 
                                 if fappintrecamt20222023 > 0:
-                                     fappintrecamt20222023 = fappintrecamt20222023 * 1
+                                     fappintrecamt20222023 = fappintrecamt20222023 * .7
 
                                 if fappprinrecamt20232024 > 0:
-                                     fappprinrecamt20232024 = fappprinrecamt20232024 * .5
+                                     fappprinrecamt20232024 = fappprinrecamt20232024 * .2
 
                                 if fappintrecamt20232024 > 0:
-                                     fappintrecamt20232024 = fappprinrecamt20232024 * 1
+                                     fappintrecamt20232024 = fappprinrecamt20232024 * .7
 
                                 if fappprinrecamt20242025 > 0:
-                                     fappprinrecamt20242025  = fappprinrecamt20242025 * .5
+                                     fappprinrecamt20242025  = fappprinrecamt20242025 * .2
 
                                 if fappintrecamt20242025 > 0:
-                                     fappintrecamt20242025 = fappintrecamt20242025 * 1
+                                     fappintrecamt20242025 = fappintrecamt20242025 * .7
 
 
 
 
                                 if fappprinrecamt20192020 <= 0:
                                      fappprinrecamt20192020 = 0
-
                                 if fappintrecamt20192020 <= 0:
                                      fappintrecamt20192020 = 0
                                      
+
                                 if fappprinrecamt20202021 <= 0:
                                      fappprinrecamt20202021 = 0
-
                                 if fappintrecamt20202021 <= 0:
                                      fappintrecamt20202021 = 0
 
+
+
                                 if fappprinrecamt20212022 <= 0:
                                      fappprinrecamt20212022 = 0
-
                                 if fappintrecamt20212022 <= 0:
                                      fappintrecamt20212022 = 0
 
                                 if fappprinrecamt20222023 <= 0:
                                      fappprinrecamt20222023 = 0
-
                                 if fappintrecamt20222023 <= 0:
                                      fappintrecamt20222023 = 0
 
                                 if fappprinrecamt20232024 <= 0:
                                      fappprinrecamt20232024 = 0
-
                                 if fappintrecamt20232024 <= 0:
                                      fappintrecamt20232024 = 0
 
                                 if fappprinrecamt20242025 <= 0:
                                      fappprinrecamt20242025 = 0
-
                                 if fappintrecamt20242025 <= 0:
                                      fappintrecamt20242025 = 0
 
@@ -2213,34 +2210,14 @@ def admssadminauditmasterdata(request):
                                 fapptotalrecamt = fappprinrecamt + fappintrecamt
 
 
-                                # if fstatus == 'C': 
+ 
+                                fappprinbalamt = fapploanamt - (fappprinrecamt20192020 + fappprinrecamt20202021 + fappprinrecamt20212022 + fappprinrecamt20222023 + fappprinrecamt20232024 + fappprinrecamt20242025 + fappprinrecamt20252026) 
 
-                                #     fappprinrecamt20212022 = fapploanamt - fappprinrecamt20192020 - fappprinrecamt20202021 - fappprinrecamt20222023 - fappprinrecamt20232024 - fappprinrecamt20242025 - fappprinrecamt20252026
-                                #     fappintrecamt20212022 = fappintrecamt - fappintrecamt20192020 - fappintrecamt20202021 - fappintrecamt20212022 - fappintrecamt20222023 - fappintrecamt20232024 - fappintrecamt20242025 - fappintrecamt20252026
-                           
-                                #     fappprinrecamt = fappprinrecamt20192020 + fappprinrecamt20202021 + fappprinrecamt20212022 + fappprinrecamt20222023 + fappprinrecamt20232024 + fappprinrecamt20242025 + fappprinrecamt20252026 
-                                #     fappintrecamt = fappintrecamt20192020 + fappintrecamt20202021 + fappintrecamt20212022 + fappintrecamt20222023 + fappintrecamt20232024 + fappintrecamt20242025 + fappintrecamt20252026
-                                #     fapptotalrecamt = fappprinrecamt + fappintrecamt
+                                fappintbalamt = (fapploanint - fappintrecamt)
 
-
-                                #     fapploandueamt = fapptotalrecamt
-                                #     fapploanamt = fappprinrecamt
-                                #     fapploanint = fappintrecamt
-
-
-
-
-                                #fappprinbalamt = fapploanamt - fappprinrecamt
-                                fappprinbalamt = fapploanamt - (fappprinrecamt20192020 + fappprinrecamt20202021 + fappprinrecamt20212022 + fappprinrecamt20222023 + fappprinrecamt20232024 + fappprinrecamt20242025 + int(fappprinrecamt20252026*.7)) 
-
-                                fappintbalamt = (fapploanint - fappintrecamt)*1.1
-                                
-                                if fappintbalamt*.5 > fappprinbalamt:
-                                     fappintbalamt = fappintbalamt *.8
+                                fappprinbalamt = fappprinbalamt * 1.6332
                                      
                                 fapptotalbalamt = fappprinbalamt + fappintbalamt
-
-
 
 
                                 if fappintbalamt < 0:
@@ -2249,6 +2226,20 @@ def admssadminauditmasterdata(request):
                                     fappprinbalamt = 0
 
 
+                                if fstatus == 'C' and fapploanamt < 50000: 
+
+                                    fappprinrecamt = fappprinrecamt20192020 + fappprinrecamt20202021 + fappprinrecamt20212022 + fappprinrecamt20222023 + fappprinrecamt20232024 + fappprinrecamt20242025 + fappprinrecamt20252026 
+                                    fappintrecamt = fappintrecamt20192020 + fappintrecamt20202021 + fappintrecamt20212022 + fappintrecamt20222023 + fappintrecamt20232024 + fappintrecamt20242025 + fappintrecamt20252026
+                                    fapptotalrecamt = fappprinrecamt + fappintrecamt
+
+
+                                    fapploandueamt = fapptotalrecamt
+                                    fapploanamt = fappprinrecamt
+                                    fapploanint = fappintrecamt
+
+                                    fappprinbalamt = 0
+                                    fappintbalamt = 0
+                                    fapptotalbalamt = 0
 
 
             
