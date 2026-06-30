@@ -15,7 +15,7 @@ from admssapp.models import Rate
 from admssapp.models import Gstdata
 from admssapp.models import Crifdata
 from admssapp.models import Licdata
-from admssapp.models import Auditloanmaster20202021, Auditloanrecov20192020, Auditloanmaster20212022, Auditloanmaster20222023, Auditloanmaster20232024, Auditloanmaster20242025,Auditloanmaster20252026 
+from admssapp.models import Auditloanmaster20202021, Auditloanrecov20192020, Auditloanmaster20212022, Auditloanmaster20222023, Auditloanmaster20232024, Auditloanmaster20242025
 from admssapp.models import Daydrcr
 from admssapp.models import Authcenterexpance
 
@@ -1792,7 +1792,7 @@ def admssadminauditmasterdata(request):
                     #    x.save()
 
 
-                    Auditloanmaster20252026.objects.all().delete()
+                    Auditloanmaster20242025.objects.all().delete()
 
                     db = Daybook.objects.filter(date__range=(ffromdate,ftodate),transcd__in=['3010','3011','3012','3019']).distinct('loanid')
 
@@ -2244,7 +2244,7 @@ def admssadminauditmasterdata(request):
 
             
 
-                                audit = Auditloanmaster20252026(locationcode=flocationcode,
+                                audit = Auditloanmaster20242025(locationcode=flocationcode,
                                                                     locationname=flocationname,
                                                                     appname=fappname,
                                                                     loanid=floanid,
