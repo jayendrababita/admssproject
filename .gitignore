@@ -2,10 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-admssapp/migrations/*
-admsscoll/migrations/*
-admssadmin/migrations/*
-admssapp/migrations/*
+**/migrations/__pycache__/
 # C extensions
 *.so
 backup*
