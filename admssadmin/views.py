@@ -15,7 +15,7 @@ from admssapp.models import Rate
 from admssapp.models import Gstdata
 from admssapp.models import Crifdata
 from admssapp.models import Licdata
-from admssapp.models import Auditloanmaster20202021, Auditloanrecov20192020, Auditloanmaster20212022, Auditloanmaster20222023, Auditloanmaster20232024, Auditloanmaster20242025
+from admssapp.models import Auditloanmaster20202021, Auditloanrecov20192020, Auditloanmaster20212022, Auditloanmaster20222023, Auditloanmaster20232024, Auditloanmaster20242025,Auditloanmaster20252026
 from admssapp.models import Daydrcr
 from admssapp.models import Authcenterexpance
 
@@ -1792,7 +1792,7 @@ def admssadminauditmasterdata(request):
                     #    x.save()
 
 
-                    Auditloanmaster20242025.objects.all().delete()
+                    Auditloanmaster20252026.objects.all().delete()
 
                     db = Daybook.objects.filter(date__range=(ffromdate,ftodate),transcd__in=['3010','3011','3012','3019']).distinct('loanid')
 
@@ -2244,7 +2244,7 @@ def admssadminauditmasterdata(request):
 
             
 
-                                audit = Auditloanmaster20242025(locationcode=flocationcode,
+                                audit = Auditloanmaster20252026(locationcode=flocationcode,
                                                                     locationname=flocationname,
                                                                     appname=fappname,
                                                                     loanid=floanid,
@@ -2297,7 +2297,7 @@ def admssadminauditmasterdata(request):
 
 
 
-                    auditdata = Auditloanmaster20242025.objects.all().order_by('id').only('loanid','appname','apppresentadd','apppresentaddcity','appoccupation','appprindueamt','appintdueamt','apptotaldueamt','appprinrecamt20192020','appintrecamt20192020','apptotalrecamt20192020','appprinrecamt20202021','appintrecamt20202021','apptotalrecamt20202021','appprinrecamt20212022','appintrecamt20212022','apptotalrecamt20212022','appprinrecamt20222023','appintrecamt20222023','apptotalrecamt20222023','appprinrecamt20232024','appintrecamt20232024','apptotalrecamt20232024','appprinrecamt20242025','appintrecamt20242025','apptotalrecamt20242025','appprinrecamt20252026','appintrecamt20252026','apptotalrecamt20252026','appprinrecamt','appintrecamt','apptotalbalamt','appprinbalamt','appintbalamt','apptotalbalamt','apploandate','status')
+                    auditdata = Auditloanmaster20252026.objects.all().order_by('id').only('loanid','appname','apppresentadd','apppresentaddcity','appoccupation','appprindueamt','appintdueamt','apptotaldueamt','appprinrecamt20192020','appintrecamt20192020','apptotalrecamt20192020','appprinrecamt20202021','appintrecamt20202021','apptotalrecamt20202021','appprinrecamt20212022','appintrecamt20212022','apptotalrecamt20212022','appprinrecamt20222023','appintrecamt20222023','apptotalrecamt20222023','appprinrecamt20232024','appintrecamt20232024','apptotalrecamt20232024','appprinrecamt20242025','appintrecamt20242025','apptotalrecamt20242025','appprinrecamt20252026','appintrecamt20252026','apptotalrecamt20252026','appprinrecamt','appintrecamt','apptotalbalamt','appprinbalamt','appintbalamt','apptotalbalamt','apploandate','status')
 
                     response = HttpResponse(content_type='text/csv')
                     response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format('auditdata')
